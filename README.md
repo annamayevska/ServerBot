@@ -166,7 +166,7 @@ When the coaster is ready, and the robot is free for further use, he serves the 
 ### Main process
 
 The main model encapsulates all described activites, apart from serving the glass that is done in parallel with the CNC machine drawing.
-![Main model](/documentation/models/serverbot_process.png)
+![Main model](/documentation/models/serverbot_main_process.png)
 
 ### Subprocess
 
@@ -184,10 +184,13 @@ The project incorporates images sourced from the [SVGRepo](https://www.svgrepo.c
 ## Contribution
 
 This project optimizes the bar experience by seamlessly automating the order creation, management, processing, and the serving workflow. It minimizes and eliminates redundant manual tasks, such as specifying file names, adjusting font sizes, or manually initiating the printing and serving processes. The system integrates separate services, which are designed to be reusable, allowing for flexibility and easy future enhancements. These services exchange data through the Cloud Process Execution Engine (CPEE), which orchestrates the overall workflow, ensuring seamless interaction between the services, and managing all the components.
+
 The orchestration allows for parallelized subprocesses, increasing efficiency by handling tasks concurrently where possible. By streamlining these processes, the project provides a more efficient system, where the bar operation is optimized.
 
 ## Outlook
 
 While many intermediate steps have been eliminated, the system still relies on certain conditions that require manual supervision. For instance, the glass and coaster from a previous order must be removed from the component before the next items are served, to prevent **potential collisions**. To improve reliability, the system would benefit from the integration of an **error management and safety** framework. This would ensure that the process remains uninterrupted by wrongful interventions or the absence of certain components, preventing unpredictable behavior.
+
 Additionally, the system could be optimized further by **scaling** it to multiple serving stations.
+
 To achieve a fully immersive experience, the process would need to **also integrate the actual cocktail preparation**, such as dispensing the chosen recipe from the beverage station – a step that was excluded from the scope of this project. It would be most effective to incorporate this stage into the parallel branch responsible for serving the glass. Since the other parallel branch, which handles the coaster printing, is the most time-consuming, it offers an opportunity to run the cocktail preparation concurrently. This would significantly reduce the overall time required, optimizing efficiency and fully leveraging the potential for parallel processing.

@@ -1,6 +1,6 @@
 # grbl-service for BierdeckelBot
 
-This service is part of the **ServerBot** project and provides endpoints to control the CNC machine through its GRBL controller. It builds upon the solid foundation of the **BierdeckelBot** project, so please refer to it for more detials and original setup.
+This service is part of the **ServerBot** project and provides endpoints to control the CNC machine through its GRBL controller. It builds upon the solid foundation of the **BierdeckelBot** project, so please refer to it for more details and original setup.
 
 ### Table of Contents
 
