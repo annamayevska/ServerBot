@@ -1,0 +1,10 @@
+C:\HP 01.09.2022\Dysk D\tum_master\third_semester\Practical course\BierdeckelBot-main\ServerBot\svg-gcode-service\svg2gcode\target\release\deps\libautocfg-dbc5d6a1fbfeb0f9.rmeta: C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\lib.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\error.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\rustc.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\version.rs
+
+C:\HP 01.09.2022\Dysk D\tum_master\third_semester\Practical course\BierdeckelBot-main\ServerBot\svg-gcode-service\svg2gcode\target\release\deps\libautocfg-dbc5d6a1fbfeb0f9.rlib: C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\lib.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\error.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\rustc.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\version.rs
+
+C:\HP 01.09.2022\Dysk D\tum_master\third_semester\Practical course\BierdeckelBot-main\ServerBot\svg-gcode-service\svg2gcode\target\release\deps\autocfg-dbc5d6a1fbfeb0f9.d: C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\lib.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\error.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\rustc.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\version.rs
+
+C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\lib.rs:
+C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\error.rs:
+C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\rustc.rs:
+C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\autocfg-1.3.0\src\version.rs:

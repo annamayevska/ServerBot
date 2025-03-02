@@ -1,0 +1,72 @@
+{
+    "8": {
+        "lineHeight": 8,
+        "lineSpacing": 2.5,
+        "lineScale": 0.37
+    },
+    "9": {
+        "lineHeight": 9,
+        "lineSpacing": 4,
+        "lineScale": 0.42
+    },
+    "10": {
+        "lineHeight": 10,
+        "lineSpacing": 5,
+        "lineScale": 0.47
+    },
+    "11": {
+        "lineHeight": 11,
+        "lineSpacing": 6,
+        "lineScale": 0.52
+    },
+    "12": {
+        "lineHeight": 12,
+        "lineSpacing": 7,
+        "lineScale": 0.57
+    },
+    "13": {
+        "lineHeight": 13,
+        "lineSpacing": 7.5,
+        "lineScale": 0.61
+    },
+    "14": {
+        "lineHeight": 14,
+        "lineSpacing": 7.5,
+        "lineScale": 0.66
+    },
+    "15": {
+        "lineHeight": 15,
+        "lineSpacing": 8.5,
+        "lineScale": 0.71
+    },
+    "16": {
+        "lineHeight": 16,
+        "lineSpacing": 10,
+        "lineScale": 0.76
+    },
+    "17": {
+        "lineHeight": 17,
+        "lineSpacing": 10.5,
+        "lineScale": 0.81
+    },
+    "18": {
+        "lineHeight": 18,
+        "lineSpacing": 10,
+        "lineScale": 0.85
+    },
+    "19": {
+        "lineHeight": 19,
+        "lineSpacing": 11.5,
+        "lineScale": 0.90
+    },
+    "20": {
+        "lineHeight": 20,
+        "lineSpacing": 14,
+        "lineScale": 0.95
+    },
+    "21": {
+        "lineHeight": 21,
+        "lineSpacing": 17,
+        "lineScale": 1
+    }
+}

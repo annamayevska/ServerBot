@@ -1,0 +1,9 @@
+{
+  "lower_left_corner_x": 26,
+  "lower_left_corner_y": 13,
+  "upper_right_corner_x": 110,
+  "upper_right_corner_y": 101,
+  "feedrate": 1500,
+  "z_drawing_height": -65.65,
+  "z_safe_height": -63
+}
