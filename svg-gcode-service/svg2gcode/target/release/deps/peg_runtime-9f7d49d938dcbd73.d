@@ -1,0 +1,10 @@
+C:\HP 01.09.2022\Dysk D\tum_master\third_semester\Practical course\BierdeckelBot-main\ServerBot\svg-gcode-service\svg2gcode\target\release\deps\libpeg_runtime-9f7d49d938dcbd73.rmeta: C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\lib.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\error.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\slice.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\str.rs
+
+C:\HP 01.09.2022\Dysk D\tum_master\third_semester\Practical course\BierdeckelBot-main\ServerBot\svg-gcode-service\svg2gcode\target\release\deps\libpeg_runtime-9f7d49d938dcbd73.rlib: C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\lib.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\error.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\slice.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\str.rs
+
+C:\HP 01.09.2022\Dysk D\tum_master\third_semester\Practical course\BierdeckelBot-main\ServerBot\svg-gcode-service\svg2gcode\target\release\deps\peg_runtime-9f7d49d938dcbd73.d: C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\lib.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\error.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\slice.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\str.rs
+
+C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\lib.rs:
+C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\error.rs:
+C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\slice.rs:
+C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\peg-runtime-0.8.3\str.rs:

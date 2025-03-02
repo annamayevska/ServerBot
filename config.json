@@ -4,6 +4,6 @@
   "upper_right_corner_x": 110,
   "upper_right_corner_y": 101,
   "feedrate": 1500,
-  "z_drawing_height": -65.515,
+  "z_drawing_height": -65.65,
   "z_safe_height": -63
 }

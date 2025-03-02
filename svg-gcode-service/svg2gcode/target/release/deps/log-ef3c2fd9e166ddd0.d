@@ -1,0 +1,10 @@
+C:\HP 01.09.2022\Dysk D\tum_master\third_semester\Practical course\BierdeckelBot-main\ServerBot\svg-gcode-service\svg2gcode\target\release\deps\liblog-ef3c2fd9e166ddd0.rmeta: C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\lib.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\macros.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\serde.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\__private_api.rs
+
+C:\HP 01.09.2022\Dysk D\tum_master\third_semester\Practical course\BierdeckelBot-main\ServerBot\svg-gcode-service\svg2gcode\target\release\deps\liblog-ef3c2fd9e166ddd0.rlib: C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\lib.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\macros.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\serde.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\__private_api.rs
+
+C:\HP 01.09.2022\Dysk D\tum_master\third_semester\Practical course\BierdeckelBot-main\ServerBot\svg-gcode-service\svg2gcode\target\release\deps\log-ef3c2fd9e166ddd0.d: C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\lib.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\macros.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\serde.rs C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\__private_api.rs
+
+C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\lib.rs:
+C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\macros.rs:
+C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\serde.rs:
+C:\Users\Користувач\.cargo\registry\src\index.crates.io-6f17d22bba15001f\log-0.4.22\src\__private_api.rs:
