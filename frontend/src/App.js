@@ -19,7 +19,10 @@ function App() {
   const [selectedGalleryImage, setSelectedGalleryImage] = useState(null);
   const [isSvgDropped, setIsSvgDropped] = useState(false);
 
-  axios.defaults.baseURL = "http://localhost:5001";
+  //axios.defaults.baseURL = "http://localhost:5001";
+  const backendPort = 5001;
+  const backendHost = window.location.hostname;
+  const backendUrl = `http://${backendHost}:${backendPort}/createOrder`;
 
   useEffect(() => {
     const loadImages = async () => {
