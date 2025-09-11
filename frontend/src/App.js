@@ -20,9 +20,8 @@ function App() {
   const [isSvgDropped, setIsSvgDropped] = useState(false);
 
   //axios.defaults.baseURL = "http://localhost:5001";
-  const backendPort = 5001;
-  const backendHost = window.location.hostname;
-  const backendUrl = `http://${backendHost}:${backendPort}/createOrder`;
+  const backendHost = "lab.bpm.in.tum.de";
+  const backendUrl = `http://${backendHost}/order-creation`;
 
   useEffect(() => {
     const loadImages = async () => {
@@ -33,7 +32,7 @@ function App() {
       );
       const images = imageContext
         .keys()
-        .map((image) => `/gallery/${image.replace("./", "")}`);
+        .map((image) => `/order/gallery/${image.replace("./", "")}`);
       setGalleryImages(images);
     };
 
@@ -142,8 +141,8 @@ function App() {
       };
 
       try {
-        // Send data to createOrder endpoint
-        const response = await axios.post(`/createOrder`, orderData, {
+        // Send data
+        const response = await axios.post(backendUrl, orderData, {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
