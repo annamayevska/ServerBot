@@ -1,226 +1,338 @@
 from flask import Flask, jsonify, request
-import tempfile
-import subprocess
 import os
-import json
 import time
-import requests
 import threading
+import serial
+import requests
+import re
+import queue
+import paho.mqtt.client as mqtt
+from functools import wraps
 
 app = Flask(__name__)
 
-# Port Configuration
 PORT = "COM5"
-BAUD_RATE = "115200"
-execution_state = {"running": False}
+BAUD_RATE = 115200
+POLL_INTERVAL = 0.5
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CALLBACKS_FILE_PATH = os.path.join(BASE_DIR, "drawing_callbacks.json")
 
-# ------------------ Functions ------------------
+MQTT_BROKER = "lab.bpm.in.tum.de"
+MQTT_PORT = 1883
+MQTT_TOPIC_BASE = "myproject/grbl"
 
-#Preprocess the G-code text to ensure each command starts on a new line.
-def preprocess_gcode(gcode_text):
+TASMOTA_URL = "http://192.168.0.104/cm?cmnd=STATUS%2010"
+TASMOTA_TOPIC = "/lab-power/socket-3"
 
-    commands = []
-    current_command = []
-
-    for line in gcode_text.splitlines():
-        line = line.strip()
-        if not line:
-            continue
-        i = 0
-        while i < len(line):
-            if line[i].upper() == 'G' and (i == 0 or line[i - 1].isspace() or line[i - 1] in [';', '(']):
-                if current_command:
-                    commands.append("".join(current_command).strip())
-                    current_command = []
-            current_command.append(line[i])
-            i += 1
-
-        if current_command:
-            commands.append("".join(current_command).strip())
-            current_command = []
-
-    processed_gcode = "\n".join(commands)
-    return processed_gcode
+execution_state = {"running": False}
+execution_lock = threading.Lock()  # Added lock for safer concurrent access
 
 
-def send_gcode_file_to_grbl(gcode_file):
-    try:
-        command = [
-            "java", "-cp", "UniversalGcodeSender.jar",
-            "com.willwinder.ugs.cli.TerminalClient",
-            "--controller", "GRBL",
-            "--port", PORT,
-            "--baud", BAUD_RATE,
-            "--print-stream",
-            "--file", gcode_file
-        ]
-        result = subprocess.run(command, capture_output=True, text=True)
-        if result.returncode == 0:
-            return {"status": "success", "message": f"G-code executed successfully from {gcode_file}."}
-        else:
-            return {"status": "error", "message": result.stderr}
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
-
-
-def execute_gcode(gcode_text):
-
-    try:
-        processed_gcode = preprocess_gcode(gcode_text)
-
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".gcode", dir=".") as temp_file:
-            temp_file.write(processed_gcode.encode('utf-8'))
-            temp_file_name = temp_file.name
-
-        response = send_gcode_file_to_grbl(temp_file_name)
-
-        return response
-
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
-
-    finally:
+# --- Helper Decorator to avoid code repetition in endpoints ---
+def require_idle(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        with execution_lock:
+            if execution_state["running"]:
+                return jsonify({"status": "error", "message": "Busy"}), 400
+            execution_state["running"] = True
         try:
-            if os.path.exists(temp_file_name):
-                os.remove(temp_file_name)
-        except Exception:
-            return {"status": "error", "message": str(e)}
-
-        execution_state["running"] = False
-
-
-def get_callback_url():
-    if os.path.exists(CALLBACKS_FILE_PATH):
-            with open(CALLBACKS_FILE_PATH, 'r') as callbacks_file:
-                callback_data = json.load(callbacks_file)
-                callback_ids = [callback["callback_id"] for callback in callback_data]
-
-            if callback_ids:
-                callback_url = callback_ids[0] 
-                return callback_url
+            return f(*args, **kwargs)
+        finally:
+            with execution_lock:
+                execution_state["running"] = False
+    return wrapper
 
 
-#send a put request to continue with process after executing
+class SerialCommManager:
+    def __init__(self, port, baudrate, poll_interval=POLL_INTERVAL):
+        self.port = port
+        self.baudrate = baudrate
+        self.poll_interval = poll_interval
+        self.ser = None
+        self.lock = threading.Lock()
+
+        self.status_queue = queue.Queue()
+        self.response_queue = queue.Queue()
+        self.send_error = None
+        self.program_end_received = threading.Event()
+
+        self.reader_thread = None
+        self.reader_stop_event = threading.Event()
+        self.poll_thread = None
+        self.poll_stop_event = threading.Event()
+
+        self.mqtt_client = mqtt.Client()
+        self.last_status_values = {}
+
+        self.tasmota_thread = None
+        self.tasmota_stop_event = threading.Event()
+        self.tasmota_last_state = None
+
+        self.open()
+        self._start_mqtt()
+        self.start_reader()
+
+    # --- MQTT ---
+    def _start_mqtt(self):
+        try:
+            self.mqtt_client.connect(MQTT_BROKER, MQTT_PORT, 60)
+            self.mqtt_client.loop_start()
+            print("[MQTT] Connected to broker.")
+        except Exception as e:
+            print(f"[MQTT] Connection failed: {e}")
+
+    def _publish_if_changed(self, status_data):
+        for key, value in status_data.items():
+            if self.last_status_values.get(key) != value:
+                topic = f"{MQTT_TOPIC_BASE}/{key}"
+                self.mqtt_client.publish(topic, str(value))
+                print(f"[MQTT] Published {key}: {value}")
+        self.last_status_values.update(status_data)
+
+    # --- SERIAL STATUS PARSING ---
+    def _parse_status_line(self, line):
+        if not line.startswith('<') or not line.endswith('>'):
+            return {}
+        content = line[1:-1]
+        parts = content.split('|')
+        status_data = {}
+        for part in parts:
+            if part in ['Idle', 'Run', 'Hold', 'Alarm']:
+                status_data['status'] = part
+            elif part.startswith('MPos:'):
+                try:
+                    x, y, z = map(float, part[5:].split(','))
+                    status_data.update({'x': x, 'y': y, 'z': z})
+                except:
+                    continue
+            elif part.startswith('FS:'):
+                try:
+                    feed, _ = map(float, part[3:].split(','))
+                    status_data['feed'] = feed
+                except:
+                    continue
+        return status_data
+
+    # --- SERIAL PORT CONTROL ---
+    def open(self):
+        if self.ser is None or not self.ser.is_open:
+            self.ser = serial.Serial(self.port, self.baudrate, timeout=0.1)
+            self.ser.reset_input_buffer()
+            self.ser.reset_output_buffer()
+            print("[INFO] Serial port opened.")
+
+    def close(self):
+        if self.ser and self.ser.is_open:
+            self.ser.close()
+            print("[INFO] Serial port closed.")
+
+    # --- THREAD HELPERS ---
+    def _start_thread(self, target, stop_event, thread_attr):
+        thread = getattr(self, thread_attr)
+        if thread is None or not thread.is_alive():
+            stop_event.clear()
+            thread = threading.Thread(target=target, daemon=True)
+            setattr(self, thread_attr, thread)
+            thread.start()
+
+    def _stop_thread(self, stop_event, thread_attr):
+        thread = getattr(self, thread_attr)
+        if thread and thread.is_alive():
+            stop_event.set()
+            thread.join()
+
+    # --- READER THREAD ---
+    def start_reader(self):
+        self._start_thread(self._reader_loop, self.reader_stop_event, "reader_thread")
+
+    def stop_reader(self):
+        self._stop_thread(self.reader_stop_event, "reader_thread")
+
+    def _reader_loop(self):
+        try:
+            while not self.reader_stop_event.is_set():
+                if self.ser.in_waiting:
+                    line = self.ser.readline().decode('utf-8', errors='ignore').strip()
+                    if not line:
+                        continue
+                    if line.startswith('<'):
+                        self.status_queue.put(line)
+                        self._publish_if_changed(self._parse_status_line(line))
+                    else:
+                        self.response_queue.put(line)
+                        if re.match(r'^\[MSG:pgm end\]$', line.strip(), re.IGNORECASE):
+                            self.program_end_received.set()
+                            time.sleep(1)
+                else:
+                    time.sleep(0.01)
+        except Exception as e:
+            print(f"[ERROR] Serial reader thread error: {e}")
+
+    # --- POLLING THREAD ---
+    def start_polling(self):
+        self._start_thread(self._polling_loop, self.poll_stop_event, "poll_thread")
+
+    def stop_polling(self):
+        self._stop_thread(self.poll_stop_event, "poll_thread")
+
+    def _polling_loop(self):
+        try:
+            while not self.poll_stop_event.is_set():
+                with self.lock:
+                    self.ser.write(b'?')
+                time.sleep(self.poll_interval)
+        except Exception as e:
+            print(f"[ERROR] Polling thread error: {e}")
+
+    # --- TASMOTA THREAD ---
+    def start_tasmota_publisher(self):
+        self._start_thread(self._tasmota_loop, self.tasmota_stop_event, "tasmota_thread")
+
+    def stop_tasmota_publisher(self):
+        self._stop_thread(self.tasmota_stop_event, "tasmota_thread")
+
+    def _tasmota_loop(self):
+        while not self.tasmota_stop_event.is_set():
+            try:
+                resp = requests.get(TASMOTA_URL, timeout=5)
+                if resp.status_code == 200:
+                    state = resp.json()
+                    if state != self.tasmota_last_state:
+                        self.mqtt_client.publish(TASMOTA_TOPIC, str(state))
+                        self.tasmota_last_state = state
+                        print(f"[TASMOTA] Published state to {TASMOTA_TOPIC}")
+                if self.program_end_received.is_set() or self.send_error:
+                    break
+            except Exception as e:
+                print(f"[ERROR] Tasmota polling failed: {e}")
+            time.sleep(0.5)
+        print("[TASMOTA] Polling stopped automatically.")
+
+    # --- GCODE UTILS ---
+    def split_gcode_lines(self, gcode_text):
+        gcode_text = re.sub(r';.*|\(.*?\)', '', gcode_text)
+        gcode_text = gcode_text.replace('\n', ' ')
+        tokens = gcode_text.strip().split()
+        lines, current = [], []
+        for token in tokens:
+            if re.match(r'^[GM]\d+', token, re.IGNORECASE):
+                if current:
+                    lines.append(' '.join(current))
+                current = [token]
+            else:
+                current.append(token)
+        if current:
+            lines.append(' '.join(current))
+        return lines
+
+    def _write_serial(self, line):
+        with self.lock:
+            self.ser.write((line.strip() + '\n').encode('utf-8'))
+
+    def _send_lines(self, lines):
+        for i, line in enumerate(lines):
+            if self.send_error:
+                break
+            self._write_serial(line)
+            timeout = 95 if i == len(lines) - 1 else 5
+            start_time = time.time()
+            while time.time() - start_time < timeout:
+                try:
+                    response = self.response_queue.get(timeout=0.1)
+                    if response.lower().startswith('error'):
+                        self.send_error = response
+                        break
+                    if response.lower() == 'ok':
+                        break
+                except queue.Empty:
+                    continue
+            else:
+                self.send_error = "Timeout waiting for ok from GRBL"
+                break
+        self.stop_polling()
+        self.stop_tasmota_publisher()
+
+    def send_gcode(self, gcode_text):
+        self.send_error = None
+        self.program_end_received.clear()
+        lines = self.split_gcode_lines(gcode_text)
+
+        self.start_polling()
+        self.start_tasmota_publisher()
+
+        threading.Thread(target=self._send_lines, args=(lines,), daemon=True).start()
+        return {"status": "started", "message": "G-code sending started asynchronously."}
+
+    def send_command(self, command, timeout=20):
+        self._write_serial(command)
+        return self.wait_for_ok_or_error(timeout)
+
+    def wait_for_ok_or_error(self, timeout=20):
+        start_time = time.time()
+        while time.time() - start_time < timeout:
+            try:
+                line = self.response_queue.get(timeout=0.1)
+                if line.lower() == 'ok' or line.lower().startswith('error'):
+                    return line
+            except queue.Empty:
+                continue
+        return None
+
+
+serial_manager = SerialCommManager(PORT, BAUD_RATE)
+
+
 def send_callback(callback_url):
-    """Send a callback to the specified URL."""
     try:
-        response = requests.put(callback_url, json={"status": "done"})
-
-        if response.status_code == 200:
-            with open(CALLBACKS_FILE_PATH, 'r') as f:
-                callbacks = json.load(f)
-            callbacks = [cb for cb in callbacks if cb["callback_id"] != callback_url]
-            with open(CALLBACKS_FILE_PATH, 'w') as f:
-                json.dump(callbacks, f, indent=4)
-
+        print(f"[INFO] Sending callback to {callback_url}")
+        requests.put(callback_url, json={"status": "done"})
     except Exception as e:
-        return {"status": "error", "message": str(e)}
-
-#launch gcode execution and send callback afterwards 
-def monitor_execution_and_callback(gcode_text):
-    try:
-        execute_gcode(gcode_text)
-        while execution_state["running"]:
-            time.sleep(1)
-
-        callback_url = get_callback_url()
-        if callback_url:
-            send_callback(callback_url)
-
-        execution_state["running"] = False
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
+        print(f"[ERROR] Callback sending failed: {e}")
 
 
-
-# ------------------ Endpoints ------------------
-
+# --- FLASK ENDPOINTS ---
 @app.route('/executeGcode', methods=['POST'])
+@require_idle
 def execute_gcode_endpoint():
-    global execution_state
-    if execution_state["running"]:
-        return jsonify({"status": "error", "message": "Another G-code execution is already in progress."}), 400
-    execution_state["running"] = True
-
     cb = request.headers.get('Cpee-Callback')
     if not cb:
-        execution_state["running"] = False
-        return jsonify({"error": "Cpee-Callback header is missing"}), 400
+        return jsonify({"error": "Missing Cpee-Callback header"}), 400
 
-    if os.path.exists(CALLBACKS_FILE_PATH):
-            try:
-                with open(CALLBACKS_FILE_PATH, 'r') as f:
-                    callbacks = json.load(f)
-            except json.JSONDecodeError:
-                callbacks = [] 
-    else:
-        callbacks = []
+    gcode = (
+        request.form.get('gcode')
+        if request.content_type == 'application/x-www-form-urlencoded'
+        else request.get_json().get('gcode')
+    )
 
-    callbacks.append({"callback_id": cb})
-    with open(CALLBACKS_FILE_PATH, 'w') as f:
-        json.dump(callbacks, f, indent=4)
+    def monitor():
+        res = serial_manager.send_gcode(gcode)
+        print(f"[INFO] G-code execution result: {res}")
+        serial_manager.program_end_received.wait()
+        send_callback(cb)
 
-    try:
-        # Get gcode_text from request and execute it 
-        if request.content_type == 'application/x-www-form-urlencoded':
-            gcode_text = request.form.get('gcode')
-        elif request.content_type == 'application/json':
-            data = request.get_json()
-            gcode_text = data.get('gcode')
-        else:
-            execution_state["running"] = False
-            return jsonify({"error": "Unsupported Content-Type."}), 400
-
-        threading.Thread(target=monitor_execution_and_callback, args=(gcode_text,), daemon=True).start()
-
-        response_headers = {'CPEE-CALLBACK': 'true'}
-        return '', 200, response_headers
-
-    except Exception as e:
-        execution_state["running"] = False
-        return jsonify({"error": "An error occurred"}), 500
+    threading.Thread(target=monitor, daemon=True).start()
+    return '', 200, {'CPEE-CALLBACK': 'true'}
 
 
 @app.route('/home', methods=['POST'])
+@require_idle
 def home():
-    global execution_state
-    if execution_state["running"]:
-        return jsonify({"status": "error", "message": "Another operation is in progress."}), 400
-    execution_state["running"] = True
-    try:
-        command = [
-            "java", "-cp", "UniversalGcodeSender.jar",
-            "com.willwinder.ugs.cli.TerminalClient",
-            "--controller", "GRBL",
-            "--port", PORT,
-            "--baud", BAUD_RATE,
-            "--home"
-        ]
-        result = subprocess.run(command, capture_output=True, text=True)
-        if result.returncode == 0:
-            return jsonify({"status": "success", "output": result.stdout})
-        else:
-            return jsonify({"status": "error", "output": result.stderr}), 500
-
-    except Exception as e:
-        return jsonify({"status": "error", "message": str(e)}), 500
-    finally:
-        execution_state["running"] = False
+    res = serial_manager.send_command("$H", timeout=40)
+    if res is None:
+        return jsonify({"status": "error", "output": "Timeout"}), 500
+    return jsonify({"status": "success", "output": res})
 
 
 @app.route('/robot', methods=['POST'])
+@require_idle
 def robot():
-    global execution_state
-    if execution_state["running"]:
-        return jsonify({"status": "error", "message": "Another operation is in progress."}), 400
-    execution_state["running"] = True
-    try:
-        response = send_gcode_file_to_grbl("robot-position.gcode")
-        return jsonify(response)
-    finally:
-        execution_state["running"] = False
+    if not os.path.exists("robot-position.gcode"):
+        return jsonify({"status": "error", "message": "Missing file"}), 500
+    with open("robot-position.gcode") as f:
+        gcode = f.read()
+    return jsonify(serial_manager.send_gcode(gcode))
 
 
 if __name__ == "__main__":
