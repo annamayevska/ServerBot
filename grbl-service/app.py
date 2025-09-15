@@ -11,7 +11,8 @@ from functools import wraps
 
 app = Flask(__name__)
 
-PORT = "COM5"
+#PORT = "COM5"
+PORT = "/dev/ttyUSB0"
 BAUD_RATE = 115200
 POLL_INTERVAL = 0.5
 
