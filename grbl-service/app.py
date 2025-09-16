@@ -23,7 +23,7 @@ MQTT_BROKER = "lab.bpm.in.tum.de"
 MQTT_PORT = 1883
 MQTT_TOPIC_BASE = "myproject/grbl"
 
-TASMOTA_URL = "http://192.168.0.104/cm?cmnd=STATUS%2010"
+TASMOTA_URL = "http://131.159.6.241:8080/cm?cmnd=STATUS%2010"
 TASMOTA_TOPIC = "/lab-power/socket-3"
 
 execution_state = {"running": False}
