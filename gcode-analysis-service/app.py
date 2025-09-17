@@ -119,7 +119,7 @@ def analyze_gcode(gcode, overlap_tol=0.2):
     }
 
 # --- Flask endpoint ---
-@app.route('/analyzeGcode', methods=['POST'])
+@app.route('/analyzeGcode/', methods=['POST'])
 def analyze_gcode_endpoint():
     gcode = None
     if request.content_type == 'application/x-www-form-urlencoded':
