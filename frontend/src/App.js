@@ -199,10 +199,11 @@ function App() {
         }}
       >
         <img
-          src="/TUM_logo.svg"
+          src={`${process.env.PUBLIC_URL}/TUM_logo.svg`}
           alt="TUM Logo"
           style={{ width: "100px", marginRight: "10px" }}
         />
+
         <h1>RobotBar</h1>
       </div>
 
