@@ -8,7 +8,7 @@ ORDER_CREATION_SERVICE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file
 CALLBACKS_FILE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'callbacks.json'))
 os.makedirs(ORDER_CREATION_SERVICE_DIR, exist_ok=True)
 
-@app.route('/manageOrders', methods=['GET'])
+@app.route('/', methods=['GET'])
 #Fetch and return the first available order, or store the callback if no orders found
 def manage_orders():
 
