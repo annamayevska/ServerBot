@@ -27,7 +27,7 @@ except Exception as e:
     config = {}
 
 
-@app.route('/svg2gcode', methods=['POST'])
+@app.route('/', methods=['POST'])
 def svg_to_gcode():
     svg_code = None
 

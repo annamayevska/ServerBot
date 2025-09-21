@@ -13,7 +13,7 @@ FONT_DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "text2
 with open(FONT_DATA_PATH, 'r') as font_data_file:
     font_data = json.load(font_data_file)
 
-@app.route('/text2gcode/', methods=['POST'])
+@app.route('/', methods=['POST'])
 def text_to_gcode():
 
     if request.content_type == 'application/x-www-form-urlencoded':
