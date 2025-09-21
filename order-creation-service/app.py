@@ -14,7 +14,7 @@ JSON_STORAGE_DIR = os.path.join(ORDER_CREATION_SERVICE_DIR, 'orders')
 os.makedirs(JSON_STORAGE_DIR, exist_ok=True)
 CALLBACKS_FILE_PATH = os.path.join(ORDER_CREATION_SERVICE_DIR, '../order-management-service/callbacks.json')
 
-@app.route('', methods=['POST', 'OPTIONS'])
+@app.route('/', methods=['POST', 'OPTIONS'])
 def create_order():
     if request.method == 'OPTIONS':
         response = jsonify({'message': 'CORS preflight success'})
