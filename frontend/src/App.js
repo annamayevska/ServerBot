@@ -199,7 +199,7 @@ function App() {
         }}
       >
         <img
-          src={`${process.env.PUBLIC_URL}/TUM_logo.svg`}
+          src={`/order/TUM_logo.svg`}
           alt="TUM Logo"
           style={{ width: "100px", marginRight: "10px" }}
         />
