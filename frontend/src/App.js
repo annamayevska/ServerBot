@@ -21,7 +21,7 @@ function App() {
 
   //axios.defaults.baseURL = "http://localhost:5001";
   const backendHost = "lab.bpm.in.tum.de";
-  const backendUrl = `http://${backendHost}/order-creation`;
+  const backendUrl = `https://${backendHost}/order-creation`;
 
   useEffect(() => {
     const loadImages = async () => {
