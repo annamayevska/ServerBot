@@ -138,7 +138,7 @@ def compute_features(parsed):
     }
 
 # --- Flask endpoint ---
-@app.route('/analyzeGcode', methods=['POST'])
+@app.route('/', methods=['POST'])
 def analyze_gcode_endpoint():
     gcode = None
     if request.content_type == 'application/x-www-form-urlencoded':
