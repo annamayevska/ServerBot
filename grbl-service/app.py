@@ -237,7 +237,7 @@ class SerialCommManager:
             if self.send_error:
                 break
             self._write_serial(line)
-            timeout = 95 if i == len(lines) - 1 else 5
+            timeout = 185 if i == len(lines) - 1 else 5
             start_time = time.time()
             while time.time() - start_time < timeout:
                 try:
