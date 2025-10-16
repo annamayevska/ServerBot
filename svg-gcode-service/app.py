@@ -102,11 +102,15 @@ def svg_to_gcode():
 
         if result.returncode == 0:
             gcode_content = result.stdout.strip()
-            valid_gcode = re.sub(r'[^G0-9.\-XYZF;M2]', ' ', gcode_content)
-            valid_gcode = re.sub(r'\s+', ' ', valid_gcode)
-            valid_gcode = valid_gcode.replace(';', '')
+            valid_gcode = gcode_content.strip()
+            valid_gcode = re.sub(r'[^A-Za-z0-9.\-;+]', ' ', valid_gcode)
             valid_gcode = re.sub(r'(?<!\d)\.(?!\d)|(?<=\d)\.(?!\d)', ' ', valid_gcode)
+            valid_gcode = valid_gcode.replace(';', ' ')
+            valid_gcode = re.sub(r'(?i)(^|\s)[A-Z](?=\s|$)', ' ', valid_gcode)
+            valid_gcode = re.sub(r'(?<![A-Za-z])\s[-+]?\d+(\.\d+)?(?=\s)', '', valid_gcode)
+            valid_gcode = re.sub(r'\s+', ' ', valid_gcode).strip()
 
+            
           
             return jsonify({"status": "success", "gcode": valid_gcode.strip()}), 200
         else:
