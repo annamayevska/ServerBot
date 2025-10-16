@@ -102,12 +102,13 @@ def svg_to_gcode():
 
         if result.returncode == 0:
             gcode_content = result.stdout.strip()
-            valid_gcode = gcode_content.strip()
-            valid_gcode = re.sub(r'[^A-Za-z0-9.\-;+]', ' ', valid_gcode)
-            valid_gcode = valid_gcode.replace(';', ' ')
-            valid_gcode = re.sub(r'(?<![A-Za-z0-9])([A-Za-z]+)(?![-+]?\d)', ' ', valid_gcode)
-            valid_gcode = re.sub(r'(?<![A-Za-z])[-+]?\d+(\.\d+)?(?![A-Za-z])', ' ', valid_gcode)
-            valid_gcode = re.sub(r'\s+', ' ', valid_gcode).strip()
+            valid_gcode = re.sub(r'[^G0-9.\-XYZF;M2]', ' ', gcode_content)
+            valid_gcode = re.sub(r'\s+', ' ', valid_gcode)
+            valid_gcode = valid_gcode.replace(';', '')
+            valid_gcode = re.sub(r'(?<!\d)\.(?!\d)|(?<=\d)\.(?!\d)', ' ', valid_gcode)
+            valid_gcode = re.sub(r'(?<![A-Z])\s[-+]?\d+(\.\d+)?(?=\s)', '', valid_gcode)
+            valid_gcode = re.sub(r'(?<=\s)[A-Z](?=\s)', '', valid_gcode)
+            valid_gcode = re.sub(r'[^A-Z0-9.\-;]', ' ', gcode_content)
 
             
           
