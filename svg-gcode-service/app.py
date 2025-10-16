@@ -106,7 +106,7 @@ def svg_to_gcode():
             valid_gcode = re.sub(r'[^A-Za-z0-9.\-;+]', ' ', valid_gcode)
             valid_gcode = re.sub(r'(?<!\d)\.(?!\d)|(?<=\d)\.(?!\d)', ' ', valid_gcode)
             valid_gcode = valid_gcode.replace(';', ' ')
-            valid_gcode = re.sub(r'(?i)(^|\s)[A-Z](?=\s|$)', ' ', valid_gcode)
+            valid_gcode = re.sub(r'(?i)(?<=\s|^)[A-Z]+(?=\s|$)', ' ', valid_gcode)
             valid_gcode = re.sub(r'(?<![A-Za-z])\s[-+]?\d+(\.\d+)?(?=\s)', '', valid_gcode)
             valid_gcode = re.sub(r'\s+', ' ', valid_gcode).strip()
 
