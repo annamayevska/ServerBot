@@ -311,6 +311,7 @@ def execute_gcode_endpoint():
         res = serial_manager.send_gcode(gcode)
         print(f"[INFO] G-code execution result: {res}")
         serial_manager.program_end_received.wait()
+        time.sleep(2)
         send_callback(cb)
 
     threading.Thread(target=monitor, daemon=True).start()
