@@ -10,7 +10,9 @@ import paho.mqtt.client as mqtt
 from functools import wraps
 
 app = Flask(__name__)
+#connection parameters
 
+#direct connection to GRBL device
 #PORT = "COM5"
 PORT =  "/dev/ttyUSB_lab"
 BAUD_RATE = 115200
@@ -27,7 +29,7 @@ TASMOTA_URL = "http://131.159.6.241:8080/cm?cmnd=STATUS%2010"
 TASMOTA_TOPIC = "/lab-power/socket-3"
 
 execution_state = {"running": False}
-execution_lock = threading.Lock()  # Added lock for safer concurrent access
+execution_lock = threading.Lock()  
 
 
 # --- Helper Decorator to avoid code repetition in endpoints ---
@@ -240,6 +242,10 @@ class SerialCommManager:
             timeout = 185 if i == len(lines) - 1 else 5
             start_time = time.time()
             while time.time() - start_time < timeout:
+                #pausing the execution if the stop endpoint is called 
+                #if self.send_error:
+                    #print("[INFO] Stop detected during line execution.")
+                    #self._write_serial('!')
                 try:
                     response = self.response_queue.get(timeout=0.1)
                     if response.lower().startswith('error'):
@@ -252,6 +258,10 @@ class SerialCommManager:
             else:
                 self.send_error = "Timeout waiting for ok from GRBL"
                 break
+        #notify if the execution was stopped
+        #if self.send_error == "STOP":
+        #self.program_end_received.set()
+
         self.stop_polling()
         self.stop_tasmota_publisher()
 
@@ -335,6 +345,14 @@ def robot():
     with open("robot-position.gcode") as f:
         gcode = f.read()
     return jsonify(serial_manager.send_gcode(gcode))
+
+@app.route('/stop', methods=['POST'])
+def stop_execution():
+    if serial_manager.send_error is None:
+        serial_manager.send_error = "STOP"
+        return jsonify({"status": "stopping"}), 200
+    else:
+        return jsonify({"status": "already stopping or idle"}), 200
 
 
 if __name__ == "__main__":
