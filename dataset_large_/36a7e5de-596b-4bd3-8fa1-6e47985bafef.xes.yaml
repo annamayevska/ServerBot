@@ -1,0 +1,5801 @@
+---
+log:
+  namespaces:
+    stream: https://cpee.org/datastream/
+    ssn: http://www.w3.org/ns/ssn/
+    sosa: http://www.w3.org/ns/sosa/
+  xes:
+    creator: cpee.org
+    features: nested-attributes
+  extension:
+    time: http://www.xes-standard.org/time.xesext
+    concept: http://www.xes-standard.org/concept.xesext
+    id: http://www.xes-standard.org/identity.xesext
+    lifecycle: http://www.xes-standard.org/lifecycle.xesext
+    cpee: http://cpee.org/cpee.xesext
+    stream: https://cpee.org/datastream/datastream.xesext
+  global:
+    trace:
+      concept:name: __NOTSPECIFIED__
+      cpee:name: __NOTSPECIFIED__
+    event:
+      concept:instance: -1
+      concept:name: __NOTSPECIFIED__
+      concept:endpoint: __NOTSPECIFIED__
+      id:id: __NOTSPECIFIED__
+      cpee:uuid: __NOTSPECIFIED__
+      lifecycle:transition: complete
+      cpee:lifecycle:transition: activity/calling
+      time:timestamp: ''
+  trace:
+    concept:name: 67764
+    cpee:name: Block0210_1
+    cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+---
+event:
+  concept:instance: 67764
+  id:id: external
+  cpee:activity: external
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: state/change
+  cpee:state: ready
+  time:timestamp: '2025-10-02T14:53:24.246241+02:00'
+---
+event:
+  concept:instance: 67764
+  id:id: external
+  cpee:activity: external
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: endpoints/change
+  data:
+  - name: timeout
+    value: https://cpee.org/services/timeout.php
+  - name: subprocess
+    value: https://cpee.org/flow/start/url/
+  - name: reads
+    value: https-get://lab.bpm.in.tum.de/mqtt/read/values/
+  - name: read
+    value: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  - name: executeGcode
+    value: https://lab.bpm.in.tum.de/cnc/executeGcode
+  - name: wait
+    value: https-get://lab.bpm.in.tum.de/mqtt/read/values
+  - name: grbl_home
+    value: https://lab.bpm.in.tum.de/cnc/home
+  - name: send
+    value: https-post://cpee.org/ing/correlators/message/send/
+  - name: analyzeGcode
+    value: https://lab.bpm.in.tum.de/analyzeGcode
+  - name: order
+    value: https://lab.bpm.in.tum.de/order-management
+  - name: text2gcode
+    value: https://lab.bpm.in.tum.de/text2gcode
+  - name: svg2gcode
+    value: https://lab.bpm.in.tum.de/svg2gcode
+  time:timestamp: '2025-10-02T14:53:24.253404+02:00'
+---
+event:
+  concept:instance: 67764
+  id:id: external
+  cpee:activity: external
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: dataelements/change
+  time:timestamp: '2025-10-02T14:53:24.249151+02:00'
+---
+event:
+  concept:instance: 67764
+  id:id: external
+  cpee:activity: external
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: attributes/change
+  data:
+  - name: guarded
+    value: none
+  - name: modeltype
+    value: CPEE
+  - name: theme
+    value: extended
+  - name: guarded_id
+    value: ''
+  - name: info
+    value: Block0210_1
+  - name: creator
+    value: Christine Ashcreek
+  - name: author
+    value: Christine Ashcreek
+  - name: model_uuid
+    value: a0b142df-9ea7-49a1-8a4e-a9897c910c3d
+  - name: model_version
+    value: ''
+  - name: design_dir
+    value: Theses.dir/Anna Mayevska.dir/
+  - name: design_stage
+    value: development
+  time:timestamp: '2025-10-02T14:53:24.256578+02:00'
+---
+event:
+  concept:instance: 67764
+  id:id: external
+  cpee:activity: external
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: description/change
+  cpee:description: |
+    <?xml version="1.0"?>
+    <description xmlns="http://cpee.org/ns/description/1.0">
+      <call id="a6" endpoint="grbl_home">
+        <parameters>
+          <label>Homing</label>
+          <color/>
+          <method>:post</method>
+          <arguments/>
+        </parameters>
+        <annotations>
+          <_generic/>
+          <_timing>
+            <_timing_weight/>
+            <_timing_avg/>
+            <explanations/>
+          </_timing>
+          <_shifting>
+            <_shifting_type>Duration</_shifting_type>
+          </_shifting>
+          <_context_data_analysis>
+            <probes/>
+            <ips/>
+          </_context_data_analysis>
+          <report>
+            <url/>
+          </report>
+          <_notes>
+            <_notes_general/>
+          </_notes>
+        </annotations>
+        <documentation>
+          <input/>
+          <output/>
+          <implementation>
+            <description/>
+          </implementation>
+        </documentation>
+      </call>
+      <call id="a12" endpoint="order">
+        <parameters>
+          <label>Receive input</label>
+          <color>#8ff0a4</color>
+          <method>:get</method>
+          <arguments/>
+        </parameters>
+        <code>
+          <signal_receive/>
+          <signal_change/>
+          <prepare/>
+          <finalize output="result">data.text_input = result['text']
+    data.svg_input = result['svg']</finalize>
+          <update output="result"/>
+          <rescue output="result"/>
+        </code>
+        <annotations>
+          <_generic/>
+          <_timing>
+            <_timing_weight/>
+            <_timing_avg/>
+            <explanations/>
+          </_timing>
+          <_shifting>
+            <_shifting_type>Duration</_shifting_type>
+          </_shifting>
+          <_context_data_analysis>
+            <probes/>
+            <ips/>
+          </_context_data_analysis>
+          <report>
+            <url/>
+          </report>
+          <_notes>
+            <_notes_general/>
+          </_notes>
+        </annotations>
+        <documentation>
+          <input/>
+          <output/>
+          <implementation>
+            <description/>
+          </implementation>
+          <code>
+            <description/>
+          </code>
+        </documentation>
+      </call>
+      <call id="a15" endpoint="text2gcode">
+        <parameters>
+          <label>Create gcode</label>
+          <color/>
+          <method>:post</method>
+          <arguments>
+            <text>!data.text_input</text>
+          </arguments>
+        </parameters>
+        <code>
+          <signal_receive>on</signal_receive>
+          <signal_change>on</signal_change>
+          <prepare/>
+          <finalize output="result">data.gcode_input = result['gcode']</finalize>
+          <update output="result"/>
+          <rescue output="result"/>
+        </code>
+        <annotations>
+          <_generic/>
+          <_timing>
+            <_timing_weight/>
+            <_timing_avg/>
+            <explanations/>
+          </_timing>
+          <_shifting>
+            <_shifting_type>Duration</_shifting_type>
+          </_shifting>
+          <_context_data_analysis>
+            <probes/>
+            <ips/>
+          </_context_data_analysis>
+          <report>
+            <url/>
+          </report>
+          <_notes>
+            <_notes_general/>
+          </_notes>
+        </annotations>
+        <documentation>
+          <input/>
+          <output/>
+          <implementation>
+            <description/>
+          </implementation>
+          <code>
+            <description/>
+          </code>
+        </documentation>
+      </call>
+      <call id="a14" endpoint="analyzeGcode">
+        <parameters>
+          <label>Analyze gcode</label>
+          <color/>
+          <method>:post</method>
+          <arguments>
+            <gcode>!data.gcode_input</gcode>
+          </arguments>
+        </parameters>
+        <code>
+          <signal_receive>on</signal_receive>
+          <signal_change>on</signal_change>
+          <prepare/>
+          <finalize output="result">data.path_length = result['path_length']
+    data.segment_count = result['segment_count']
+    data.avg_segment_length = result['avg_segment_length']
+    data.direction_change_sum_deg = result['direction_change_sum_deg']
+    data.sharp_turns = result['sharp_turns']
+    data.bbox_area = result['bbox_area']
+    data.num_lifts = result['num_lifts']
+    data.g1_proportion = result['g1_proportion']
+    data.g0_proportion = result['g0_proportion']</finalize>
+          <update output="result"/>
+          <rescue output="result"/>
+        </code>
+        <annotations>
+          <_generic/>
+          <_timing>
+            <_timing_weight/>
+            <_timing_avg/>
+            <explanations/>
+          </_timing>
+          <_shifting>
+            <_shifting_type>Duration</_shifting_type>
+          </_shifting>
+          <_context_data_analysis>
+            <probes/>
+            <ips/>
+          </_context_data_analysis>
+          <report>
+            <url/>
+          </report>
+          <_notes>
+            <_notes_general/>
+          </_notes>
+        </annotations>
+        <documentation>
+          <input/>
+          <output/>
+          <implementation>
+            <description/>
+          </implementation>
+          <code>
+            <description/>
+          </code>
+        </documentation>
+      </call>
+      <parallel wait="-1" cancel="last">
+        <parallel_branch>
+          <call id="a11" endpoint="read">
+            <parameters>
+              <label>Getting coordinates x</label>
+              <arguments>
+                <topic>myproject/grbl/x</topic>
+                <start_topic>myproject/grbl/status</start_topic>
+                <start_value>Run</start_value>
+                <stop_topic>myproject/grbl/status</stop_topic>
+                <stop_value>Idle</stop_value>
+              </arguments>
+            </parameters>
+            <code>
+              <prepare/>
+              <finalize output="result"/>
+              <update output="result"/>
+              <rescue output="result"/>
+            </code>
+            <annotations>
+              <_generic/>
+              <_timing>
+                <_timing_weight/>
+                <_timing_avg/>
+                <explanations/>
+              </_timing>
+              <_shifting>
+                <_shifting_type>Duration</_shifting_type>
+              </_shifting>
+              <_context_data_analysis>
+                <probes>
+                  <probe>
+                    <id>x</id>
+                    <source>Machine</source>
+                    <extractor_type>extrinsic</extractor_type>
+                    <extractor_code>result</extractor_code>
+                    <extractor_url>result</extractor_url>
+                    <extractor_params/>
+                    <visualizer_url/>
+                    <visualizer_params/>
+                  </probe>
+                </probes>
+                <ips/>
+              </_context_data_analysis>
+              <report>
+                <url/>
+              </report>
+              <_notes>
+                <_notes_general/>
+              </_notes>
+            </annotations>
+            <documentation>
+              <input/>
+              <output/>
+              <implementation>
+                <description/>
+              </implementation>
+              <code>
+                <description/>
+              </code>
+            </documentation>
+          </call>
+        </parallel_branch>
+        <parallel_branch>
+          <call id="a10" endpoint="read">
+            <parameters>
+              <label>Getting coordinates y</label>
+              <arguments>
+                <topic>myproject/grbl/y</topic>
+                <start_topic>myproject/grbl/status</start_topic>
+                <start_value>Run</start_value>
+                <stop_topic>myproject/grbl/status</stop_topic>
+                <stop_value>Idle</stop_value>
+              </arguments>
+            </parameters>
+            <code>
+              <prepare/>
+              <finalize output="result"/>
+              <update output="result"/>
+              <rescue output="result"/>
+            </code>
+            <annotations>
+              <_generic/>
+              <_timing>
+                <_timing_weight/>
+                <_timing_avg/>
+                <explanations/>
+              </_timing>
+              <_shifting>
+                <_shifting_type>Duration</_shifting_type>
+              </_shifting>
+              <_context_data_analysis>
+                <probes>
+                  <probe>
+                    <id>y</id>
+                    <source>Machine</source>
+                    <extractor_type>extrinsic</extractor_type>
+                    <extractor_code>result</extractor_code>
+                    <extractor_url>result</extractor_url>
+                    <extractor_params/>
+                    <visualizer_url/>
+                    <visualizer_params/>
+                  </probe>
+                </probes>
+                <ips/>
+              </_context_data_analysis>
+              <report>
+                <url/>
+              </report>
+              <_notes>
+                <_notes_general/>
+              </_notes>
+            </annotations>
+            <documentation>
+              <input/>
+              <output/>
+              <implementation>
+                <description/>
+              </implementation>
+              <code>
+                <description/>
+              </code>
+            </documentation>
+          </call>
+        </parallel_branch>
+        <parallel_branch>
+          <call id="a9" endpoint="read">
+            <parameters>
+              <label>Getting coordinates z</label>
+              <arguments>
+                <topic>myproject/grbl/z</topic>
+                <start_topic>myproject/grbl/status</start_topic>
+                <start_value>Run</start_value>
+                <stop_topic>myproject/grbl/status</stop_topic>
+                <stop_value>Idle</stop_value>
+              </arguments>
+            </parameters>
+            <code>
+              <prepare/>
+              <finalize output="result"/>
+              <update output="result"/>
+              <rescue output="result"/>
+            </code>
+            <annotations>
+              <_generic/>
+              <_timing>
+                <_timing_weight/>
+                <_timing_avg/>
+                <explanations/>
+              </_timing>
+              <_shifting>
+                <_shifting_type>Duration</_shifting_type>
+              </_shifting>
+              <_context_data_analysis>
+                <probes>
+                  <probe>
+                    <id>z</id>
+                    <source>Machine</source>
+                    <extractor_type>extrinsic</extractor_type>
+                    <extractor_code>result</extractor_code>
+                    <extractor_url>result</extractor_url>
+                    <extractor_params/>
+                    <visualizer_url/>
+                    <visualizer_params/>
+                  </probe>
+                </probes>
+                <ips/>
+              </_context_data_analysis>
+              <report>
+                <url/>
+              </report>
+              <_notes>
+                <_notes_general/>
+              </_notes>
+            </annotations>
+            <documentation>
+              <input/>
+              <output/>
+              <implementation>
+                <description/>
+              </implementation>
+              <code>
+                <description/>
+              </code>
+            </documentation>
+          </call>
+        </parallel_branch>
+        <parallel_branch>
+          <call id="a2" endpoint="read">
+            <parameters>
+              <label>Getting electricity data</label>
+              <color/>
+              <arguments>
+                <topic>/lab-power/socket-3/STATUS10</topic>
+                <start_topic>myproject/grbl/status</start_topic>
+                <start_value>Run</start_value>
+                <stop_topic>myproject/grbl/status</stop_topic>
+                <stop_value>Idle</stop_value>
+              </arguments>
+            </parameters>
+            <code>
+              <signal_receive>on</signal_receive>
+              <signal_change>on</signal_change>
+              <prepare/>
+              <finalize output="result"/>
+              <update output="result"/>
+              <rescue output="result"/>
+            </code>
+            <annotations>
+              <_generic/>
+              <_timing>
+                <_timing_weight/>
+                <_timing_avg/>
+                <explanations/>
+              </_timing>
+              <_shifting>
+                <_shifting_type>Duration</_shifting_type>
+              </_shifting>
+              <_context_data_analysis>
+                <probes>
+                  <probe>
+                    <id>Power</id>
+                    <source>Socket</source>
+                    <extractor_type>extrinsic</extractor_type>
+                    <extractor_code>result[/"Power"\s*:\s*([0-9.]+)/, 1]</extractor_code>
+                    <extractor_url/>
+                    <extractor_params/>
+                    <visualizer_url/>
+                    <visualizer_params/>
+                  </probe>
+                  <probe>
+                    <id>Current</id>
+                    <source>Socket</source>
+                    <extractor_type>extrinsic</extractor_type>
+                    <extractor_code>result[/"Current"\s*:\s*([0-9.]+)/, 1]</extractor_code>
+                    <extractor_url/>
+                    <extractor_params/>
+                    <visualizer_url/>
+                    <visualizer_params/>
+                  </probe>
+                </probes>
+                <ips/>
+              </_context_data_analysis>
+              <report>
+                <url/>
+              </report>
+              <_notes>
+                <_notes_general/>
+              </_notes>
+            </annotations>
+            <documentation>
+              <input/>
+              <output/>
+              <implementation>
+                <description/>
+              </implementation>
+              <code>
+                <description/>
+              </code>
+            </documentation>
+          </call>
+        </parallel_branch>
+        <parallel_branch>
+          <call id="a8" endpoint="timeout">
+            <parameters>
+              <label/>
+              <color/>
+              <method>:post</method>
+              <arguments>
+                <timeout>1</timeout>
+              </arguments>
+            </parameters>
+            <annotations>
+              <_generic/>
+              <_timing>
+                <_timing_weight/>
+                <_timing_avg/>
+                <explanations/>
+              </_timing>
+              <_shifting>
+                <_shifting_type>Duration</_shifting_type>
+              </_shifting>
+              <_context_data_analysis>
+                <probes/>
+                <ips/>
+              </_context_data_analysis>
+              <report>
+                <url/>
+              </report>
+              <_notes>
+                <_notes_general/>
+              </_notes>
+            </annotations>
+            <documentation>
+              <input/>
+              <output/>
+              <implementation>
+                <description/>
+              </implementation>
+            </documentation>
+          </call>
+          <call id="a4" endpoint="executeGcode">
+            <parameters>
+              <label>Drawing</label>
+              <color/>
+              <method>:post</method>
+              <arguments>
+                <gcode>!data.gcode_input</gcode>
+              </arguments>
+            </parameters>
+            <code>
+              <signal_receive/>
+              <signal_change/>
+              <prepare/>
+              <finalize output="result"/>
+              <update output="result"/>
+              <rescue output="result"/>
+            </code>
+            <annotations>
+              <_generic/>
+              <_timing>
+                <_timing_weight/>
+                <_timing_avg/>
+                <explanations/>
+              </_timing>
+              <_shifting>
+                <_shifting_type>Duration</_shifting_type>
+              </_shifting>
+              <_context_data_analysis>
+                <probes/>
+                <ips/>
+              </_context_data_analysis>
+              <report>
+                <url/>
+              </report>
+              <_notes>
+                <_notes_general/>
+              </_notes>
+            </annotations>
+            <documentation>
+              <input/>
+              <output/>
+              <implementation>
+                <description/>
+              </implementation>
+              <code>
+                <description/>
+              </code>
+            </documentation>
+          </call>
+        </parallel_branch>
+        <parallel_branch>
+          <call id="a5" endpoint="read">
+            <parameters>
+              <label>Getting feedrate</label>
+              <color/>
+              <arguments>
+                <topic>myproject/grbl/feed</topic>
+                <start_topic>myproject/grbl/status</start_topic>
+                <start_value>Run</start_value>
+                <stop_topic>myproject/grbl/status</stop_topic>
+                <stop_value>Idle</stop_value>
+              </arguments>
+            </parameters>
+            <code>
+              <signal_receive/>
+              <signal_change/>
+              <prepare/>
+              <finalize output="result"/>
+              <update output="result"/>
+              <rescue output="result"/>
+            </code>
+            <annotations>
+              <_generic/>
+              <_timing>
+                <_timing_weight/>
+                <_timing_avg/>
+                <explanations/>
+              </_timing>
+              <_shifting>
+                <_shifting_type>Duration</_shifting_type>
+              </_shifting>
+              <_context_data_analysis>
+                <probes>
+                  <probe>
+                    <id>feedrate</id>
+                    <source>machine</source>
+                    <extractor_type>extrinsic</extractor_type>
+                    <extractor_code>result</extractor_code>
+                    <extractor_url>result</extractor_url>
+                    <extractor_params/>
+                    <visualizer_url/>
+                    <visualizer_params/>
+                  </probe>
+                </probes>
+                <ips/>
+              </_context_data_analysis>
+              <report>
+                <url/>
+              </report>
+              <_notes>
+                <_notes_general/>
+              </_notes>
+            </annotations>
+            <documentation>
+              <input/>
+              <output/>
+              <implementation>
+                <description/>
+              </implementation>
+              <code>
+                <description/>
+              </code>
+            </documentation>
+          </call>
+        </parallel_branch>
+      </parallel>
+      <call id="a1" endpoint="send">
+        <parameters>
+          <label>Notify subprocess finish</label>
+          <arguments>
+            <id>subprocessFinished </id>
+            <message>1</message>
+            <ttl>0</ttl>
+          </arguments>
+        </parameters>
+        <annotations>
+          <_generic/>
+          <_timing>
+            <_timing_weight/>
+            <_timing_avg/>
+            <explanations/>
+          </_timing>
+          <_shifting>
+            <_shifting_type>Duration</_shifting_type>
+          </_shifting>
+          <_context_data_analysis>
+            <probes/>
+            <ips/>
+          </_context_data_analysis>
+          <report>
+            <url/>
+          </report>
+          <_notes>
+            <_notes_general/>
+          </_notes>
+        </annotations>
+        <documentation>
+          <input/>
+          <output/>
+          <implementation>
+            <description/>
+          </implementation>
+        </documentation>
+      </call>
+    </description>
+  cpee:change_uuid: c5f0c15a91f5cd8c669113f3475e421abb57709b
+  time:timestamp: '2025-10-02T14:53:24.273414+02:00'
+---
+event:
+  concept:instance: 67764
+  id:id: external
+  cpee:activity: external
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: state/change
+  cpee:state: running
+  time:timestamp: '2025-10-02T14:53:24.461939+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Homing
+  concept:endpoint: https://lab.bpm.in.tum.de/cnc/home
+  id:id: a6
+  cpee:activity: a6
+  cpee:activity_uuid: 9aec7085dc4a1b099e527179effe9e21
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: start
+  cpee:lifecycle:transition: activity/calling
+  data:
+  time:timestamp: '2025-10-02T14:53:24.487400+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Homing
+  concept:endpoint: https://lab.bpm.in.tum.de/cnc/home
+  id:id: a6
+  cpee:activity: a6
+  cpee:activity_uuid: 9aec7085dc4a1b099e527179effe9e21
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: result
+    mimetype: application/json
+    data: |
+      {
+        "output": "ok",
+        "status": "success"
+      }
+  time:timestamp: '2025-10-02T14:53:43.702603+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Homing
+  concept:endpoint: https://lab.bpm.in.tum.de/cnc/home
+  id:id: a6
+  cpee:activity: a6
+  cpee:activity_uuid: 9aec7085dc4a1b099e527179effe9e21
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: complete
+  cpee:lifecycle:transition: activity/done
+  time:timestamp: '2025-10-02T14:53:43.719893+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Receive input
+  concept:endpoint: https://lab.bpm.in.tum.de/order-management
+  id:id: a12
+  cpee:activity: a12
+  cpee:activity_uuid: ab72f5514976e4b8cdf5b7da11ade15f
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: start
+  cpee:lifecycle:transition: activity/calling
+  data:
+  time:timestamp: '2025-10-02T14:53:43.747025+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Receive input
+  concept:endpoint: https://lab.bpm.in.tum.de/order-management
+  id:id: a12
+  cpee:activity: a12
+  cpee:activity_uuid: ab72f5514976e4b8cdf5b7da11ade15f
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: result
+    mimetype: application/json
+    data: |
+      {
+        "order_id": "94e550db-8a3f-4285-8c22-adf252d2113e",
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\">\r\n  <path d=\"M 20 20 L 80 20 L 80 80 L 20 80 Z\" stroke=\"black\" fill=\"transparent\" stroke-width=\"2\"/>\r\n</svg>\r\n",
+        "text": "jo"
+      }
+  time:timestamp: '2025-10-02T14:53:43.799668+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Receive input
+  concept:endpoint: https://lab.bpm.in.tum.de/order-management
+  id:id: a12
+  cpee:activity: a12
+  cpee:activity_uuid: ab72f5514976e4b8cdf5b7da11ade15f
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: dataelements/change
+  data:
+  - name: text_input
+    value: jo
+  - name: svg_input
+    value: "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\"
+      viewBox=\"0 0 100 100\">\r\n  <path d=\"M 20 20 L 80 20 L 80 80 L 20 80 Z\"
+      stroke=\"black\" fill=\"transparent\" stroke-width=\"2\"/>\r\n</svg>\r\n"
+  time:timestamp: '2025-10-02T14:53:43.829346+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Receive input
+  concept:endpoint: https://lab.bpm.in.tum.de/order-management
+  id:id: a12
+  cpee:activity: a12
+  cpee:activity_uuid: ab72f5514976e4b8cdf5b7da11ade15f
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: complete
+  cpee:lifecycle:transition: activity/done
+  time:timestamp: '2025-10-02T14:53:43.829551+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Create gcode
+  concept:endpoint: https://lab.bpm.in.tum.de/text2gcode
+  id:id: a15
+  cpee:activity: a15
+  cpee:activity_uuid: b1a9d0eef1ff208fb2c847a6be3c3302
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: start
+  cpee:lifecycle:transition: activity/calling
+  data:
+  - name: text
+    value: jo
+  time:timestamp: '2025-10-02T14:53:43.867250+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Create gcode
+  concept:endpoint: https://lab.bpm.in.tum.de/text2gcode
+  id:id: a15
+  cpee:activity: a15
+  cpee:activity_uuid: b1a9d0eef1ff208fb2c847a6be3c3302
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: result
+    mimetype: application/json
+    data: |
+      {
+        "gcode": "G90 G21 G0 X61.73 Y33.96 G1 Z-65.65 F1500 G1 X62.49 Y33.2 F1500 G1 X63.25 Y33.96 F1500 G1 X62.49 Y34.72 F1500 G1 X61.73 Y33.96 F1500 G0 Z-63 G0 X62.49 Y28.64 G1 Z-65.65 F1500 G1 X62.49 Y15.72 F1500 G1 X61.73 Y13.440001 F1500 G1 X60.21 Y12.68 F1500 G1 X58.69 Y12.68 F1500 G0 Z-63 G0 X71.99 Y28.64 G1 Z-65.65 F1500 G1 X70.47 Y27.880001 F1500 G1 X68.95 Y26.36 F1500 G1 X68.19 Y24.08 F1500 G1 X68.19 Y22.56 F1500 G1 X68.95 Y20.28 F1500 G1 X70.47 Y18.76 F1500 G1 X71.99 Y18.0 F1500 G1 X74.270004 Y18.0 F1500 G1 X75.79 Y18.76 F1500 G1 X77.31 Y20.28 F1500 G1 X78.07 Y22.56 F1500 G1 X78.07 Y24.08 F1500 G1 X77.31 Y26.36 F1500 G1 X75.79 Y27.880001 F1500 G1 X74.270004 Y28.64 F1500 G1 X71.99 Y28.64 F1500 G0 Z-63   G0 Z-30 M2",
+        "status": "success"
+      }
+  time:timestamp: '2025-10-02T14:53:43.994824+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Create gcode
+  concept:endpoint: https://lab.bpm.in.tum.de/text2gcode
+  id:id: a15
+  cpee:activity: a15
+  cpee:activity_uuid: b1a9d0eef1ff208fb2c847a6be3c3302
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: complete
+  cpee:lifecycle:transition: activity/done
+  time:timestamp: '2025-10-02T14:53:44.021547+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Create gcode
+  concept:endpoint: https://lab.bpm.in.tum.de/text2gcode
+  id:id: a15
+  cpee:activity: a15
+  cpee:activity_uuid: b1a9d0eef1ff208fb2c847a6be3c3302
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: dataelements/change
+  data:
+  - name: gcode_input
+    value: G90 G21 G0 X61.73 Y33.96 G1 Z-65.65 F1500 G1 X62.49 Y33.2 F1500 G1 X63.25
+      Y33.96 F1500 G1 X62.49 Y34.72 F1500 G1 X61.73 Y33.96 F1500 G0 Z-63 G0 X62.49
+      Y28.64 G1 Z-65.65 F1500 G1 X62.49 Y15.72 F1500 G1 X61.73 Y13.440001 F1500 G1
+      X60.21 Y12.68 F1500 G1 X58.69 Y12.68 F1500 G0 Z-63 G0 X71.99 Y28.64 G1 Z-65.65
+      F1500 G1 X70.47 Y27.880001 F1500 G1 X68.95 Y26.36 F1500 G1 X68.19 Y24.08 F1500
+      G1 X68.19 Y22.56 F1500 G1 X68.95 Y20.28 F1500 G1 X70.47 Y18.76 F1500 G1 X71.99
+      Y18.0 F1500 G1 X74.270004 Y18.0 F1500 G1 X75.79 Y18.76 F1500 G1 X77.31 Y20.28
+      F1500 G1 X78.07 Y22.56 F1500 G1 X78.07 Y24.08 F1500 G1 X77.31 Y26.36 F1500 G1
+      X75.79 Y27.880001 F1500 G1 X74.270004 Y28.64 F1500 G1 X71.99 Y28.64 F1500 G0
+      Z-63   G0 Z-30 M2
+  time:timestamp: '2025-10-02T14:53:44.021373+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Analyze gcode
+  concept:endpoint: https://lab.bpm.in.tum.de/analyzeGcode
+  id:id: a14
+  cpee:activity: a14
+  cpee:activity_uuid: c5c6035d0e96c01988a14010cc597812
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: start
+  cpee:lifecycle:transition: activity/calling
+  data:
+  - name: gcode
+    value: G90 G21 G0 X61.73 Y33.96 G1 Z-65.65 F1500 G1 X62.49 Y33.2 F1500 G1 X63.25
+      Y33.96 F1500 G1 X62.49 Y34.72 F1500 G1 X61.73 Y33.96 F1500 G0 Z-63 G0 X62.49
+      Y28.64 G1 Z-65.65 F1500 G1 X62.49 Y15.72 F1500 G1 X61.73 Y13.440001 F1500 G1
+      X60.21 Y12.68 F1500 G1 X58.69 Y12.68 F1500 G0 Z-63 G0 X71.99 Y28.64 G1 Z-65.65
+      F1500 G1 X70.47 Y27.880001 F1500 G1 X68.95 Y26.36 F1500 G1 X68.19 Y24.08 F1500
+      G1 X68.19 Y22.56 F1500 G1 X68.95 Y20.28 F1500 G1 X70.47 Y18.76 F1500 G1 X71.99
+      Y18.0 F1500 G1 X74.270004 Y18.0 F1500 G1 X75.79 Y18.76 F1500 G1 X77.31 Y20.28
+      F1500 G1 X78.07 Y22.56 F1500 G1 X78.07 Y24.08 F1500 G1 X77.31 Y26.36 F1500 G1
+      X75.79 Y27.880001 F1500 G1 X74.270004 Y28.64 F1500 G1 X71.99 Y28.64 F1500 G0
+      Z-63   G0 Z-30 M2
+  time:timestamp: '2025-10-02T14:53:44.063568+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Analyze gcode
+  concept:endpoint: https://lab.bpm.in.tum.de/analyzeGcode
+  id:id: a14
+  cpee:activity: a14
+  cpee:activity_uuid: c5c6035d0e96c01988a14010cc597812
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: result
+    mimetype: application/json
+    data: |
+      {
+        "avg_segment_length": 2.400018166170946,
+        "bbox_area": 427.1351999999999,
+        "direction_change_sum_deg": 828.5190204809878,
+        "g0_proportion": 0.20588235294117646,
+        "g1_proportion": 0.7941176470588235,
+        "num_lifts": 7,
+        "path_length": 81.60061764981216,
+        "segment_count": 34,
+        "sharp_turns": 6,
+        "status": "success"
+      }
+  time:timestamp: '2025-10-02T14:53:44.116846+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Analyze gcode
+  concept:endpoint: https://lab.bpm.in.tum.de/analyzeGcode
+  id:id: a14
+  cpee:activity: a14
+  cpee:activity_uuid: c5c6035d0e96c01988a14010cc597812
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: dataelements/change
+  data:
+  - name: path_length
+    value: 81.60061764981216
+  - name: segment_count
+    value: 34
+  - name: avg_segment_length
+    value: 2.400018166170946
+  - name: direction_change_sum_deg
+    value: 828.5190204809878
+  - name: sharp_turns
+    value: 6
+  - name: bbox_area
+    value: 427.1351999999999
+  - name: num_lifts
+    value: 7
+  - name: g1_proportion
+    value: 0.7941176470588235
+  - name: g0_proportion
+    value: 0.20588235294117646
+  time:timestamp: '2025-10-02T14:53:44.141273+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Analyze gcode
+  concept:endpoint: https://lab.bpm.in.tum.de/analyzeGcode
+  id:id: a14
+  cpee:activity: a14
+  cpee:activity_uuid: c5c6035d0e96c01988a14010cc597812
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: complete
+  cpee:lifecycle:transition: activity/done
+  time:timestamp: '2025-10-02T14:53:44.141473+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: start
+  cpee:lifecycle:transition: activity/calling
+  data:
+  - name: topic
+    value: myproject/grbl/x
+  - name: start_topic
+    value: myproject/grbl/status
+  - name: start_value
+    value: Run
+  - name: stop_topic
+    value: myproject/grbl/status
+  - name: stop_value
+    value: Idle
+  time:timestamp: '2025-10-02T14:53:44.201331+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: start
+  cpee:lifecycle:transition: activity/calling
+  data:
+  - name: topic
+    value: myproject/grbl/z
+  - name: start_topic
+    value: myproject/grbl/status
+  - name: start_value
+    value: Run
+  - name: stop_topic
+    value: myproject/grbl/status
+  - name: stop_value
+    value: Idle
+  time:timestamp: '2025-10-02T14:53:44.206301+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: start
+  cpee:lifecycle:transition: activity/calling
+  data:
+  - name: topic
+    value: "/lab-power/socket-3/STATUS10"
+  - name: start_topic
+    value: myproject/grbl/status
+  - name: start_value
+    value: Run
+  - name: stop_topic
+    value: myproject/grbl/status
+  - name: stop_value
+    value: Idle
+  time:timestamp: '2025-10-02T14:53:44.251322+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: start
+  cpee:lifecycle:transition: activity/calling
+  data:
+  - name: topic
+    value: myproject/grbl/feed
+  - name: start_topic
+    value: myproject/grbl/status
+  - name: start_value
+    value: Run
+  - name: stop_topic
+    value: myproject/grbl/status
+  - name: stop_value
+    value: Idle
+  time:timestamp: '2025-10-02T14:53:44.252980+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: start
+  cpee:lifecycle:transition: activity/calling
+  data:
+  - name: topic
+    value: myproject/grbl/y
+  - name: start_topic
+    value: myproject/grbl/status
+  - name: start_value
+    value: Run
+  - name: stop_topic
+    value: myproject/grbl/status
+  - name: stop_value
+    value: Idle
+  time:timestamp: '2025-10-02T14:53:44.270776+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: ''
+  concept:endpoint: https://cpee.org/services/timeout.php
+  id:id: a8
+  cpee:activity: a8
+  cpee:activity_uuid: 4db3f249ea538784bc7ce4f7a556f755
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: start
+  cpee:lifecycle:transition: activity/calling
+  data:
+  - name: timeout
+    value: '1'
+  time:timestamp: '2025-10-02T14:53:44.273294+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: ''
+  concept:endpoint: https://cpee.org/services/timeout.php
+  id:id: a8
+  cpee:activity: a8
+  cpee:activity_uuid: 4db3f249ea538784bc7ce4f7a556f755
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: result
+    mimetype: application/json
+    data: "{}"
+  time:timestamp: '2025-10-02T14:53:45.290509+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: ''
+  concept:endpoint: https://cpee.org/services/timeout.php
+  id:id: a8
+  cpee:activity: a8
+  cpee:activity_uuid: 4db3f249ea538784bc7ce4f7a556f755
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: complete
+  cpee:lifecycle:transition: activity/done
+  time:timestamp: '2025-10-02T14:53:45.315382+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Drawing
+  concept:endpoint: https://lab.bpm.in.tum.de/cnc/executeGcode
+  id:id: a4
+  cpee:activity: a4
+  cpee:activity_uuid: 633f10d4cc2588d43de1b5a339881f27
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: start
+  cpee:lifecycle:transition: activity/calling
+  data:
+  - name: gcode
+    value: G90 G21 G0 X61.73 Y33.96 G1 Z-65.65 F1500 G1 X62.49 Y33.2 F1500 G1 X63.25
+      Y33.96 F1500 G1 X62.49 Y34.72 F1500 G1 X61.73 Y33.96 F1500 G0 Z-63 G0 X62.49
+      Y28.64 G1 Z-65.65 F1500 G1 X62.49 Y15.72 F1500 G1 X61.73 Y13.440001 F1500 G1
+      X60.21 Y12.68 F1500 G1 X58.69 Y12.68 F1500 G0 Z-63 G0 X71.99 Y28.64 G1 Z-65.65
+      F1500 G1 X70.47 Y27.880001 F1500 G1 X68.95 Y26.36 F1500 G1 X68.19 Y24.08 F1500
+      G1 X68.19 Y22.56 F1500 G1 X68.95 Y20.28 F1500 G1 X70.47 Y18.76 F1500 G1 X71.99
+      Y18.0 F1500 G1 X74.270004 Y18.0 F1500 G1 X75.79 Y18.76 F1500 G1 X77.31 Y20.28
+      F1500 G1 X78.07 Y22.56 F1500 G1 X78.07 Y24.08 F1500 G1 X77.31 Y26.36 F1500 G1
+      X75.79 Y27.880001 F1500 G1 X74.270004 Y28.64 F1500 G1 X71.99 Y28.64 F1500 G0
+      Z-63   G0 Z-30 M2
+  time:timestamp: '2025-10-02T14:53:45.353849+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '1729.0'
+      stream:timestamp: 2025-10-02 14:53:45.994231117 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"1729.0"'
+  time:timestamp: '2025-10-02T14:53:45.973250+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '5.38'
+      stream:timestamp: 2025-10-02 14:53:46.015199339 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"5.38"'
+  time:timestamp: '2025-10-02T14:53:46.001149+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '2.96'
+      stream:timestamp: 2025-10-02 14:53:46.037996748 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"2.96"'
+  time:timestamp: '2025-10-02T14:53:46.025626+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '7'
+      stream:timestamp: 2025-10-02 14:53:46.174798461 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.136'
+      stream:timestamp: 2025-10-02 14:53:46.174977678 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:20\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":7,\"ApparentPower\":30,\"ReactivePower\":29,\"Factor\":0.22,\"Voltage\":220,\"Current\":0.136}}}"'
+  time:timestamp: '2025-10-02T14:53:46.156344+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '2283.0'
+      stream:timestamp: 2025-10-02 14:53:46.485735417 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"2283.0"'
+  time:timestamp: '2025-10-02T14:53:46.469774+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '20.785'
+      stream:timestamp: 2025-10-02 14:53:46.515998214 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"20.785"'
+  time:timestamp: '2025-10-02T14:53:46.500836+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '11.435'
+      stream:timestamp: 2025-10-02 14:53:46.543658205 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"11.435"'
+  time:timestamp: '2025-10-02T14:53:46.524135+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '31'
+      stream:timestamp: 2025-10-02 14:53:46.792684266 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.226'
+      stream:timestamp: 2025-10-02 14:53:46.792754026 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:21\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":31,\"ApparentPower\":50,\"ReactivePower\":39,\"Factor\":0.63,\"Voltage\":220,\"Current\":0.226}}}"'
+  time:timestamp: '2025-10-02T14:53:46.773323+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '20.468'
+      stream:timestamp: 2025-10-02 14:53:47.004868080 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"20.468"'
+  time:timestamp: '2025-10-02T14:53:46.980314+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '37.204'
+      stream:timestamp: 2025-10-02 14:53:47.013186342 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"37.204"'
+  time:timestamp: '2025-10-02T14:53:47.003649+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '32'
+      stream:timestamp: 2025-10-02 14:53:47.447425191 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.226'
+      stream:timestamp: 2025-10-02 14:53:47.447497677 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:22\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":32,\"ApparentPower\":50,\"ReactivePower\":38,\"Factor\":0.64,\"Voltage\":219,\"Current\":0.226}}}"'
+  time:timestamp: '2025-10-02T14:53:47.432862+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '29.39'
+      stream:timestamp: 2025-10-02 14:53:47.488613855 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"29.39"'
+  time:timestamp: '2025-10-02T14:53:47.479345+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '1828.0'
+      stream:timestamp: 2025-10-02 14:53:47.526956979 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"1828.0"'
+  time:timestamp: '2025-10-02T14:53:47.502816+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '53.424'
+      stream:timestamp: 2025-10-02 14:53:47.547210550 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"53.424"'
+  time:timestamp: '2025-10-02T14:53:47.522897+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '133.0'
+      stream:timestamp: 2025-10-02 14:53:47.983376414 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"133.0"'
+  time:timestamp: '2025-10-02T14:53:47.974708+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '61.581'
+      stream:timestamp: 2025-10-02 14:53:48.018483238 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"61.581"'
+  time:timestamp: '2025-10-02T14:53:48.000044+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '33.879'
+      stream:timestamp: 2025-10-02 14:53:48.044674210 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"33.879"'
+  time:timestamp: '2025-10-02T14:53:48.029751+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '28'
+      stream:timestamp: 2025-10-02 14:53:48.093787957 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.226'
+      stream:timestamp: 2025-10-02 14:53:48.093857752 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:22\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":28,\"ApparentPower\":50,\"ReactivePower\":41,\"Factor\":0.57,\"Voltage\":219,\"Current\":0.226}}}"'
+  time:timestamp: '2025-10-02T14:53:48.076563+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-5.39"
+      stream:timestamp: 2025-10-02 14:53:48.494168159 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-5.39"'
+  time:timestamp: '2025-10-02T14:53:48.483740+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '33.96'
+      stream:timestamp: 2025-10-02 14:53:48.518526037 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"33.96"'
+  time:timestamp: '2025-10-02T14:53:48.508879+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '61.73'
+      stream:timestamp: 2025-10-02 14:53:48.544340848 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"61.73"'
+  time:timestamp: '2025-10-02T14:53:48.531854+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '1500.0'
+      stream:timestamp: 2025-10-02 14:53:48.563003608 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"1500.0"'
+  time:timestamp: '2025-10-02T14:53:48.552890+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '21'
+      stream:timestamp: 2025-10-02 14:53:48.706033017 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.188'
+      stream:timestamp: 2025-10-02 14:53:48.706104203 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:23\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":21,\"ApparentPower\":41,\"ReactivePower\":35,\"Factor\":0.52,\"Voltage\":219,\"Current\":0.188}}}"'
+  time:timestamp: '2025-10-02T14:53:48.683647+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-17.714"
+      stream:timestamp: 2025-10-02 14:53:49.000896691 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-17.714"'
+  time:timestamp: '2025-10-02T14:53:48.982645+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '19'
+      stream:timestamp: 2025-10-02 14:53:49.356965171 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.188'
+      stream:timestamp: 2025-10-02 14:53:49.357041776 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:24\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":19,\"ApparentPower\":41,\"ReactivePower\":37,\"Factor\":0.46,\"Voltage\":219,\"Current\":0.188}}}"'
+  time:timestamp: '2025-10-02T14:53:49.332553+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-30.069"
+      stream:timestamp: 2025-10-02 14:53:49.494336760 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-30.069"'
+  time:timestamp: '2025-10-02T14:53:49.484105+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '20'
+      stream:timestamp: 2025-10-02 14:53:49.904890685 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.188'
+      stream:timestamp: 2025-10-02 14:53:49.905018144 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:24\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":20,\"ApparentPower\":41,\"ReactivePower\":36,\"Factor\":0.47,\"Voltage\":220,\"Current\":0.188}}}"'
+  time:timestamp: '2025-10-02T14:53:49.891417+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-42.435"
+      stream:timestamp: 2025-10-02 14:53:50.000236733 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-42.435"'
+  time:timestamp: '2025-10-02T14:53:49.981329+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '20'
+      stream:timestamp: 2025-10-02 14:53:50.442202098 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.188'
+      stream:timestamp: 2025-10-02 14:53:50.442752844 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:25\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":20,\"ApparentPower\":41,\"ReactivePower\":36,\"Factor\":0.47,\"Voltage\":220,\"Current\":0.188}}}"'
+  time:timestamp: '2025-10-02T14:53:50.430944+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-54.799"
+      stream:timestamp: 2025-10-02 14:53:50.481063356 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-54.799"'
+  time:timestamp: '2025-10-02T14:53:50.471964+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-64.769"
+      stream:timestamp: 2025-10-02 14:53:50.995370436 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-64.769"'
+  time:timestamp: '2025-10-02T14:53:50.978875+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '439.0'
+      stream:timestamp: 2025-10-02 14:53:51.030540340 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"439.0"'
+  time:timestamp: '2025-10-02T14:53:51.010746+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '19'
+      stream:timestamp: 2025-10-02 14:53:51.049214178 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.188'
+      stream:timestamp: 2025-10-02 14:53:51.049439015 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:25\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":19,\"ApparentPower\":41,\"ReactivePower\":37,\"Factor\":0.47,\"Voltage\":220,\"Current\":0.188}}}"'
+  time:timestamp: '2025-10-02T14:53:51.038236+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '62.93'
+      stream:timestamp: 2025-10-02 14:53:51.495767132 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"62.93"'
+  time:timestamp: '2025-10-02T14:53:51.481191+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '33.64'
+      stream:timestamp: 2025-10-02 14:53:51.520997677 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"33.64"'
+  time:timestamp: '2025-10-02T14:53:51.510107+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '310.0'
+      stream:timestamp: 2025-10-02 14:53:51.540614766 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"310.0"'
+  time:timestamp: '2025-10-02T14:53:51.531527+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-65.65"
+      stream:timestamp: 2025-10-02 14:53:51.561620565 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-65.65"'
+  time:timestamp: '2025-10-02T14:53:51.552845+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '19'
+      stream:timestamp: 2025-10-02 14:53:51.595365438 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.171'
+      stream:timestamp: 2025-10-02 14:53:51.595590483 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:26\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":19,\"ApparentPower\":38,\"ReactivePower\":33,\"Factor\":0.50,\"Voltage\":220,\"Current\":0.171}}}"'
+  time:timestamp: '2025-10-02T14:53:51.575822+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '61.791'
+      stream:timestamp: 2025-10-02 14:53:51.999308390 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"61.791"'
+  time:timestamp: '2025-10-02T14:53:51.984554+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '34.021'
+      stream:timestamp: 2025-10-02 14:53:52.018073151 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"34.021"'
+  time:timestamp: '2025-10-02T14:53:52.009489+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '108.0'
+      stream:timestamp: 2025-10-02 14:53:52.047944756 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"108.0"'
+  time:timestamp: '2025-10-02T14:53:52.037270+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '25'
+      stream:timestamp: 2025-10-02 14:53:52.103186808 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.171'
+      stream:timestamp: 2025-10-02 14:53:52.103256296 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:26\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Period\":0,\"Power\":25,\"ApparentPower\":38,\"ReactivePower\":28,\"Factor\":0.66,\"Voltage\":220,\"Current\":0.171}}}"'
+  time:timestamp: '2025-10-02T14:53:52.092273+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '61.749'
+      stream:timestamp: 2025-10-02 14:53:52.498984379 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"61.749"'
+  time:timestamp: '2025-10-02T14:53:52.479572+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '33.828'
+      stream:timestamp: 2025-10-02 14:53:52.515414459 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"33.828"'
+  time:timestamp: '2025-10-02T14:53:52.503120+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '366.0'
+      stream:timestamp: 2025-10-02 14:53:52.554818600 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"366.0"'
+  time:timestamp: '2025-10-02T14:53:52.524759+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-63.0"
+      stream:timestamp: 2025-10-02 14:53:52.561699073 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-63.0"'
+  time:timestamp: '2025-10-02T14:53:52.544706+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '22'
+      stream:timestamp: 2025-10-02 14:53:52.654628374 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.171'
+      stream:timestamp: 2025-10-02 14:53:52.654698681 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:27\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Period\":0,\"Power\":22,\"ApparentPower\":38,\"ReactivePower\":31,\"Factor\":0.58,\"Voltage\":220,\"Current\":0.171}}}"'
+  time:timestamp: '2025-10-02T14:53:52.640576+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '28.781'
+      stream:timestamp: 2025-10-02 14:53:52.999292861 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"28.781"'
+  time:timestamp: '2025-10-02T14:53:52.985384+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '62.47'
+      stream:timestamp: 2025-10-02 14:53:53.034996503 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"62.47"'
+  time:timestamp: '2025-10-02T14:53:53.013464+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '117.0'
+      stream:timestamp: 2025-10-02 14:53:53.053112733 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"117.0"'
+  time:timestamp: '2025-10-02T14:53:53.038601+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '22'
+      stream:timestamp: 2025-10-02 14:53:53.210283040 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.171'
+      stream:timestamp: 2025-10-02 14:53:53.210356831 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:27\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":22,\"ApparentPower\":38,\"ReactivePower\":31,\"Factor\":0.58,\"Voltage\":220,\"Current\":0.171}}}"'
+  time:timestamp: '2025-10-02T14:53:53.193563+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-65.65"
+      stream:timestamp: 2025-10-02 14:53:53.498321522 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-65.65"'
+  time:timestamp: '2025-10-02T14:53:53.485631+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '303.0'
+      stream:timestamp: 2025-10-02 14:53:53.525146434 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"303.0"'
+  time:timestamp: '2025-10-02T14:53:53.510964+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '28.573'
+      stream:timestamp: 2025-10-02 14:53:53.541108718 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"28.573"'
+  time:timestamp: '2025-10-02T14:53:53.532476+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '62.49'
+      stream:timestamp: 2025-10-02 14:53:53.563821365 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"62.49"'
+  time:timestamp: '2025-10-02T14:53:53.553998+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '25'
+      stream:timestamp: 2025-10-02 14:53:53.748435924 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.207'
+      stream:timestamp: 2025-10-02 14:53:53.748508294 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:28\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":25,\"ApparentPower\":46,\"ReactivePower\":38,\"Factor\":0.54,\"Voltage\":220,\"Current\":0.207}}}"'
+  time:timestamp: '2025-10-02T14:53:53.737479+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '21.069'
+      stream:timestamp: 2025-10-02 14:53:53.995947915 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"21.069"'
+  time:timestamp: '2025-10-02T14:53:53.982033+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '1311.0'
+      stream:timestamp: 2025-10-02 14:53:54.021314096 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"1311.0"'
+  time:timestamp: '2025-10-02T14:53:54.007449+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '17'
+      stream:timestamp: 2025-10-02 14:53:54.305014750 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.207'
+      stream:timestamp: 2025-10-02 14:53:54.305088087 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:29\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":17,\"ApparentPower\":46,\"ReactivePower\":42,\"Factor\":0.38,\"Voltage\":220,\"Current\":0.207}}}"'
+  time:timestamp: '2025-10-02T14:53:54.294331+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '62.055'
+      stream:timestamp: 2025-10-02 14:53:54.494181953 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"62.055"'
+  time:timestamp: '2025-10-02T14:53:54.481997+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '14.414'
+      stream:timestamp: 2025-10-02 14:53:54.522757632 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"14.414"'
+  time:timestamp: '2025-10-02T14:53:54.507117+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '512.0'
+      stream:timestamp: 2025-10-02 14:53:54.537279707 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"512.0"'
+  time:timestamp: '2025-10-02T14:53:54.529216+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '23'
+      stream:timestamp: 2025-10-02 14:53:54.848430803 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.207'
+      stream:timestamp: 2025-10-02 14:53:54.848500972 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:29\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":23,\"ApparentPower\":46,\"ReactivePower\":40,\"Factor\":0.50,\"Voltage\":220,\"Current\":0.207}}}"'
+  time:timestamp: '2025-10-02T14:53:54.837411+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '420.0'
+      stream:timestamp: 2025-10-02 14:53:54.999148858 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"420.0"'
+  time:timestamp: '2025-10-02T14:53:54.980503+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '12.68'
+      stream:timestamp: 2025-10-02 14:53:55.014019572 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"12.68"'
+  time:timestamp: '2025-10-02T14:53:55.004066+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '59.511'
+      stream:timestamp: 2025-10-02 14:53:55.035745869 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"59.511"'
+  time:timestamp: '2025-10-02T14:53:55.026948+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '23'
+      stream:timestamp: 2025-10-02 14:53:55.400877616 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.207'
+      stream:timestamp: 2025-10-02 14:53:55.400974470 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:30\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":23,\"ApparentPower\":46,\"ReactivePower\":39,\"Factor\":0.50,\"Voltage\":220,\"Current\":0.207}}}"'
+  time:timestamp: '2025-10-02T14:53:55.388744+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '58.69'
+      stream:timestamp: 2025-10-02 14:53:55.505772174 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"58.69"'
+  time:timestamp: '2025-10-02T14:53:55.493363+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '172.0'
+      stream:timestamp: 2025-10-02 14:53:55.532939336 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"172.0"'
+  time:timestamp: '2025-10-02T14:53:55.519709+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-63.22"
+      stream:timestamp: 2025-10-02 14:53:55.568016079 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-63.22"'
+  time:timestamp: '2025-10-02T14:53:55.552036+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '18'
+      stream:timestamp: 2025-10-02 14:53:55.969845869 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.183'
+      stream:timestamp: 2025-10-02 14:53:55.969945462 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:30\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":18,\"ApparentPower\":40,\"ReactivePower\":36,\"Factor\":0.44,\"Voltage\":220,\"Current\":0.183}}}"'
+  time:timestamp: '2025-10-02T14:53:55.947174+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '62.818'
+      stream:timestamp: 2025-10-02 14:53:56.005034072 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"62.818"'
+  time:timestamp: '2025-10-02T14:53:55.990970+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '17.634'
+      stream:timestamp: 2025-10-02 14:53:56.036059281 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"17.634"'
+  time:timestamp: '2025-10-02T14:53:56.020028+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '1914.0'
+      stream:timestamp: 2025-10-02 14:53:56.058231744 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"1914.0"'
+  time:timestamp: '2025-10-02T14:53:56.043191+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-63.0"
+      stream:timestamp: 2025-10-02 14:53:56.085823745 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-63.0"'
+  time:timestamp: '2025-10-02T14:53:56.067040+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '71.25'
+      stream:timestamp: 2025-10-02 14:53:56.489762378 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"71.25"'
+  time:timestamp: '2025-10-02T14:53:56.479563+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '27.753'
+      stream:timestamp: 2025-10-02 14:53:56.516232131 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"27.753"'
+  time:timestamp: '2025-10-02T14:53:56.507141+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '569.0'
+      stream:timestamp: 2025-10-02 14:53:56.543030335 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"569.0"'
+  time:timestamp: '2025-10-02T14:53:56.532413+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '31'
+      stream:timestamp: 2025-10-02 14:53:56.562655377 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.183'
+      stream:timestamp: 2025-10-02 14:53:56.562727061 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:31\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":31,\"ApparentPower\":40,\"ReactivePower\":26,\"Factor\":0.77,\"Voltage\":220,\"Current\":0.183}}}"'
+  time:timestamp: '2025-10-02T14:53:56.553363+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '202.0'
+      stream:timestamp: 2025-10-02 14:53:56.995313987 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"202.0"'
+  time:timestamp: '2025-10-02T14:53:56.982729+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '71.99'
+      stream:timestamp: 2025-10-02 14:53:57.026559362 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"71.99"'
+  time:timestamp: '2025-10-02T14:53:57.007679+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-65.368"
+      stream:timestamp: 2025-10-02 14:53:57.038277746 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-65.368"'
+  time:timestamp: '2025-10-02T14:53:57.028988+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '28.64'
+      stream:timestamp: 2025-10-02 14:53:57.066795813 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"28.64"'
+  time:timestamp: '2025-10-02T14:53:57.052622+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '27'
+      stream:timestamp: 2025-10-02 14:53:57.094998211 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.183'
+      stream:timestamp: 2025-10-02 14:53:57.095070575 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:31\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":27,\"ApparentPower\":40,\"ReactivePower\":30,\"Factor\":0.66,\"Voltage\":220,\"Current\":0.183}}}"'
+  time:timestamp: '2025-10-02T14:53:57.083040+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '69.204'
+      stream:timestamp: 2025-10-02 14:53:57.499128963 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"69.204"'
+  time:timestamp: '2025-10-02T14:53:57.482764+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-65.65"
+      stream:timestamp: 2025-10-02 14:53:57.514593681 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-65.65"'
+  time:timestamp: '2025-10-02T14:53:57.506339+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '335.0'
+      stream:timestamp: 2025-10-02 14:53:57.537398584 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"335.0"'
+  time:timestamp: '2025-10-02T14:53:57.528780+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '26.614'
+      stream:timestamp: 2025-10-02 14:53:57.564828413 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"26.614"'
+  time:timestamp: '2025-10-02T14:53:57.550582+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '19'
+      stream:timestamp: 2025-10-02 14:53:57.598189268 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.183'
+      stream:timestamp: 2025-10-02 14:53:57.598260009 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:32\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":19,\"ApparentPower\":40,\"ReactivePower\":35,\"Factor\":0.48,\"Voltage\":220,\"Current\":0.183}}}"'
+  time:timestamp: '2025-10-02T14:53:57.589419+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '68.19'
+      stream:timestamp: 2025-10-02 14:53:57.995516253 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"68.19"'
+  time:timestamp: '2025-10-02T14:53:57.981894+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '484.0'
+      stream:timestamp: 2025-10-02 14:53:58.021892912 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"484.0"'
+  time:timestamp: '2025-10-02T14:53:58.008075+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '22.601'
+      stream:timestamp: 2025-10-02 14:53:58.045250878 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"22.601"'
+  time:timestamp: '2025-10-02T14:53:58.030736+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '26'
+      stream:timestamp: 2025-10-02 14:53:58.173053710 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.205'
+      stream:timestamp: 2025-10-02 14:53:58.173124089 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:32\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":26,\"ApparentPower\":45,\"ReactivePower\":37,\"Factor\":0.56,\"Voltage\":220,\"Current\":0.205}}}"'
+  time:timestamp: '2025-10-02T14:53:58.153349+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '70.46'
+      stream:timestamp: 2025-10-02 14:53:58.508008761 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"70.46"'
+  time:timestamp: '2025-10-02T14:53:58.491483+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '18.77'
+      stream:timestamp: 2025-10-02 14:53:58.536150484 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"18.77"'
+  time:timestamp: '2025-10-02T14:53:58.518864+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '546.0'
+      stream:timestamp: 2025-10-02 14:53:58.559315320 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"546.0"'
+  time:timestamp: '2025-10-02T14:53:58.547865+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '25'
+      stream:timestamp: 2025-10-02 14:53:58.705664361 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.205'
+      stream:timestamp: 2025-10-02 14:53:58.705736454 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:33\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":25,\"ApparentPower\":45,\"ReactivePower\":38,\"Factor\":0.56,\"Voltage\":220,\"Current\":0.205}}}"'
+  time:timestamp: '2025-10-02T14:53:58.688963+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '18.004'
+      stream:timestamp: 2025-10-02 14:53:58.995060974 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"18.004"'
+  time:timestamp: '2025-10-02T14:53:58.983978+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '410.0'
+      stream:timestamp: 2025-10-02 14:53:59.020114044 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"410.0"'
+  time:timestamp: '2025-10-02T14:53:59.008194+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '74.279'
+      stream:timestamp: 2025-10-02 14:53:59.043141586 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"74.279"'
+  time:timestamp: '2025-10-02T14:53:59.032103+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '25'
+      stream:timestamp: 2025-10-02 14:53:59.255574644 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.205'
+      stream:timestamp: 2025-10-02 14:53:59.255645803 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:34\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":25,\"ApparentPower\":45,\"ReactivePower\":38,\"Factor\":0.55,\"Voltage\":220,\"Current\":0.205}}}"'
+  time:timestamp: '2025-10-02T14:53:59.243693+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '77.456'
+      stream:timestamp: 2025-10-02 14:53:59.507911935 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"77.456"'
+  time:timestamp: '2025-10-02T14:53:59.485976+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '641.0'
+      stream:timestamp: 2025-10-02 14:53:59.522601421 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"641.0"'
+  time:timestamp: '2025-10-02T14:53:59.510209+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '20.718'
+      stream:timestamp: 2025-10-02 14:53:59.549659518 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"20.718"'
+  time:timestamp: '2025-10-02T14:53:59.538318+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '23'
+      stream:timestamp: 2025-10-02 14:53:59.804682059 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.205'
+      stream:timestamp: 2025-10-02 14:53:59.804753314 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:34\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":23,\"ApparentPower\":45,\"ReactivePower\":39,\"Factor\":0.50,\"Voltage\":220,\"Current\":0.205}}}"'
+  time:timestamp: '2025-10-02T14:53:59.790169+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '77.716'
+      stream:timestamp: 2025-10-02 14:54:00.001064894 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"77.716"'
+  time:timestamp: '2025-10-02T14:53:59.989764+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '25.143'
+      stream:timestamp: 2025-10-02 14:54:00.027263100 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"25.143"'
+  time:timestamp: '2025-10-02T14:54:00.014173+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '623.0'
+      stream:timestamp: 2025-10-02 14:54:00.051563793 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"623.0"'
+  time:timestamp: '2025-10-02T14:54:00.039414+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '23'
+      stream:timestamp: 2025-10-02 14:54:00.369659929 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.204'
+      stream:timestamp: 2025-10-02 14:54:00.369731454 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:35\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":23,\"ApparentPower\":45,\"ReactivePower\":39,\"Factor\":0.50,\"Voltage\":220,\"Current\":0.204}}}"'
+  time:timestamp: '2025-10-02T14:54:00.357063+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '392.0'
+      stream:timestamp: 2025-10-02 14:54:00.498135352 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"392.0"'
+  time:timestamp: '2025-10-02T14:54:00.482888+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '28.401'
+      stream:timestamp: 2025-10-02 14:54:00.516130772 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"28.401"'
+  time:timestamp: '2025-10-02T14:54:00.506532+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '74.746'
+      stream:timestamp: 2025-10-02 14:54:00.537405453 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"74.746"'
+  time:timestamp: '2025-10-02T14:54:00.528511+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '26'
+      stream:timestamp: 2025-10-02 14:54:00.905185232 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.204'
+      stream:timestamp: 2025-10-02 14:54:00.905255365 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:35\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":26,\"ApparentPower\":45,\"ReactivePower\":37,\"Factor\":0.57,\"Voltage\":220,\"Current\":0.204}}}"'
+  time:timestamp: '2025-10-02T14:54:00.893519+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: "y"
+      stream:value: '28.64'
+      stream:timestamp: 2025-10-02 14:54:00.997968425 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"28.64"'
+  time:timestamp: '2025-10-02T14:54:00.984526+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: x
+      stream:value: '71.99'
+      stream:timestamp: 2025-10-02 14:54:01.019290688 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"71.99"'
+  time:timestamp: '2025-10-02T14:54:01.008266+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-65.37"
+      stream:timestamp: 2025-10-02 14:54:01.047304262 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-65.37"'
+  time:timestamp: '2025-10-02T14:54:01.032208+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '453.0'
+      stream:timestamp: 2025-10-02 14:54:01.067894212 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"453.0"'
+  time:timestamp: '2025-10-02T14:54:01.058484+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '20'
+      stream:timestamp: 2025-10-02 14:54:01.471363510 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.204'
+      stream:timestamp: 2025-10-02 14:54:01.471436842 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:36\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":20,\"ApparentPower\":45,\"ReactivePower\":40,\"Factor\":0.44,\"Voltage\":220,\"Current\":0.204}}}"'
+  time:timestamp: '2025-10-02T14:54:01.450116+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-56.516"
+      stream:timestamp: 2025-10-02 14:54:01.497288469 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-56.516"'
+  time:timestamp: '2025-10-02T14:54:01.484142+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '1940.0'
+      stream:timestamp: 2025-10-02 14:54:01.524472363 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"1940.0"'
+  time:timestamp: '2025-10-02T14:54:01.506962+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-40.211"
+      stream:timestamp: 2025-10-02 14:54:01.999355925 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-40.211"'
+  time:timestamp: '2025-10-02T14:54:01.990264+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '1785.0'
+      stream:timestamp: 2025-10-02 14:54:02.023051128 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"1785.0"'
+  time:timestamp: '2025-10-02T14:54:02.014466+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '18'
+      stream:timestamp: 2025-10-02 14:54:02.050039769 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.204'
+      stream:timestamp: 2025-10-02 14:54:02.050112720 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:36\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Period\":0,\"Power\":18,\"ApparentPower\":45,\"ReactivePower\":41,\"Factor\":0.40,\"Voltage\":220,\"Current\":0.204}}}"'
+  time:timestamp: '2025-10-02T14:54:02.036875+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: z
+      stream:value: "-30.518"
+      stream:timestamp: 2025-10-02 14:54:02.505181248 +02:00
+      stream:source: Machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"-30.518"'
+  time:timestamp: '2025-10-02T14:54:02.492463+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: feedrate
+      stream:value: '300.0'
+      stream:timestamp: 2025-10-02 14:54:02.526803539 +02:00
+      stream:source: machine
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"300.0"'
+  time:timestamp: '2025-10-02T14:54:02.517022+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '20'
+      stream:timestamp: 2025-10-02 14:54:02.563775147 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.176'
+      stream:timestamp: 2025-10-02 14:54:02.563848143 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:37\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Period\":0,\"Power\":20,\"ApparentPower\":39,\"ReactivePower\":33,\"Factor\":0.52,\"Voltage\":220,\"Current\":0.176}}}"'
+  time:timestamp: '2025-10-02T14:54:02.554591+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Drawing
+  concept:endpoint: https://lab.bpm.in.tum.de/cnc/executeGcode
+  id:id: a4
+  cpee:activity: a4
+  cpee:activity_uuid: 633f10d4cc2588d43de1b5a339881f27
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: result
+    mimetype: application/json
+    data: '{"status": "done"}'
+  time:timestamp: '2025-10-02T14:54:02.683304+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Drawing
+  concept:endpoint: https://lab.bpm.in.tum.de/cnc/executeGcode
+  id:id: a4
+  cpee:activity: a4
+  cpee:activity_uuid: 633f10d4cc2588d43de1b5a339881f27
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: complete
+  cpee:lifecycle:transition: activity/done
+  time:timestamp: '2025-10-02T14:54:02.683838+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: stream/data
+  stream:datastream:
+  - stream:point:
+      stream:id: Power
+      stream:value: '18'
+      stream:timestamp: 2025-10-02 14:54:03.112613004 +02:00
+      stream:source: Socket
+  - stream:point:
+      stream:id: Current
+      stream:value: '0.176'
+      stream:timestamp: 2025-10-02 14:54:03.112683270 +02:00
+      stream:source: Socket
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  data:
+  - name: value
+    mimetype: application/json
+    data: '"{\"StatusSNS\":{\"Time\":\"1970-01-01T01:13:37\",\"ENERGY\":{\"TotalStartTime\":\"1970-01-01T00:00:00\",\"Total\":0.030,\"Yesterday\":0.000,\"Today\":0.030,\"Power\":18,\"ApparentPower\":39,\"ReactivePower\":34,\"Factor\":0.47,\"Voltage\":220,\"Current\":0.176}}}"'
+  time:timestamp: '2025-10-02T14:54:03.103413+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  time:timestamp: '2025-10-02T14:54:03.655621+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting electricity data
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a2
+  cpee:activity: a2
+  cpee:activity_uuid: 93406620c72af5f338949ae8e22409fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: complete
+  cpee:lifecycle:transition: activity/done
+  time:timestamp: '2025-10-02T14:54:03.663141+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  time:timestamp: '2025-10-02T14:54:03.683235+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates x
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a11
+  cpee:activity: a11
+  cpee:activity_uuid: 0070e90b1367b196b33cd8039b50c0ee
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: complete
+  cpee:lifecycle:transition: activity/done
+  time:timestamp: '2025-10-02T14:54:03.689207+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  time:timestamp: '2025-10-02T14:54:03.691975+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates z
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a9
+  cpee:activity: a9
+  cpee:activity_uuid: 791ede828ac6959f68e0e5ae893825fe
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: complete
+  cpee:lifecycle:transition: activity/done
+  time:timestamp: '2025-10-02T14:54:03.714187+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  time:timestamp: '2025-10-02T14:54:03.730152+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting coordinates y
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a10
+  cpee:activity: a10
+  cpee:activity_uuid: 03d950fc970f7940c504bd9b4d905934
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: complete
+  cpee:lifecycle:transition: activity/done
+  time:timestamp: '2025-10-02T14:54:03.735723+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  time:timestamp: '2025-10-02T14:54:03.737011+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Getting feedrate
+  concept:endpoint: https-get://lab.bpm.in.tum.de/mqtt/read/record_start_stop
+  id:id: a5
+  cpee:activity: a5
+  cpee:activity_uuid: 597f4f18e30a4c51222d62618f68cbd3
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: complete
+  cpee:lifecycle:transition: activity/done
+  time:timestamp: '2025-10-02T14:54:03.737634+02:00'
+---
+event:
+  concept:instance: 67764
+  id:id: external
+  cpee:activity: external
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: gateway/join
+  time:timestamp: '2025-10-02T14:54:03.765838+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Notify subprocess finish
+  concept:endpoint: https-post://cpee.org/ing/correlators/message/send/
+  id:id: a1
+  cpee:activity: a1
+  cpee:activity_uuid: 8b1807a04bcaa42c820f0796f409f8a6
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: start
+  cpee:lifecycle:transition: activity/calling
+  data:
+  - name: id
+    value: 'subprocessFinished '
+  - name: message
+    value: '1'
+  - name: ttl
+    value: '0'
+  time:timestamp: '2025-10-02T14:54:03.779550+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Notify subprocess finish
+  concept:endpoint: https-post://cpee.org/ing/correlators/message/send/
+  id:id: a1
+  cpee:activity: a1
+  cpee:activity_uuid: 8b1807a04bcaa42c820f0796f409f8a6
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: activity/receiving
+  time:timestamp: '2025-10-02T14:54:03.789570+02:00'
+---
+event:
+  concept:instance: 67764
+  concept:name: Notify subprocess finish
+  concept:endpoint: https-post://cpee.org/ing/correlators/message/send/
+  id:id: a1
+  cpee:activity: a1
+  cpee:activity_uuid: 8b1807a04bcaa42c820f0796f409f8a6
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: complete
+  cpee:lifecycle:transition: activity/done
+  time:timestamp: '2025-10-02T14:54:03.803644+02:00'
+---
+event:
+  concept:instance: 67764
+  id:id: external
+  cpee:activity: external
+  cpee:instance: 36a7e5de-596b-4bd3-8fa1-6e47985bafef
+  lifecycle:transition: unknown
+  cpee:lifecycle:transition: state/change
+  cpee:state: finished
+  time:timestamp: '2025-10-02T14:54:03.817759+02:00'
